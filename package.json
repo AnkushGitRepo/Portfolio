@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "description": "A modern portfolio website built with the MERN stack and Next.js",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "build": "npm run build:server && npm run build:client",
+    "start": "cd server && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
