@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { submitContactForm } from '@/lib/api';
+import { submitContactForm } from '@/lib/apiWithFallback';
 import { ContactFormData } from '@/types';
 
 const ContactSection = () => {
@@ -91,7 +91,7 @@ const ContactSection = () => {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Email</h4>
-                  <p className="text-gray-700 dark:text-gray-300">your.email@example.com</p>
+                  <p className="text-gray-700 dark:text-gray-300">ankushgupta1806@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -119,7 +119,7 @@ const ContactSection = () => {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Location</h4>
-                  <p className="text-gray-700 dark:text-gray-300">San Francisco, CA</p>
+                  <p className="text-gray-700 dark:text-gray-300">Bangalore, India</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -143,7 +143,7 @@ const ContactSection = () => {
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Social</h4>
                   <div className="flex space-x-4 mt-2">
                     <a
-                      href="https://github.com/yourusername"
+                      href="https://github.com/AnkushGitRepo"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
@@ -159,7 +159,7 @@ const ContactSection = () => {
                       </svg>
                     </a>
                     <a
-                      href="https://linkedin.com/in/yourusername"
+                      href="https://linkedin.com/in/ankushgupta18"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
@@ -175,7 +175,7 @@ const ContactSection = () => {
                       </svg>
                     </a>
                     <a
-                      href="https://twitter.com/yourusername"
+                      href="https://instagram.com/_ankushg"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"

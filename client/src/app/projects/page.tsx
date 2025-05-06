@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import MainLayout from '@/components/layout/MainLayout';
 import { generateMetadata } from '@/lib/seo';
-import { getAllProjects } from '@/lib/api';
+import { getAllProjects } from '@/lib/apiWithFallback';
 import Image from 'next/image';
 
 export const metadata: Metadata = generateMetadata({
@@ -12,88 +12,7 @@ export const metadata: Metadata = generateMetadata({
 
 async function getProjects() {
   try {
-    // For development, use mock data instead of API call
-    // return await getAllProjects();
-    return [
-      {
-        _id: '1',
-        title: 'Machine Learning Dashboard',
-        description: 'A dashboard for visualizing machine learning model performance metrics.',
-        image: '/images/project1.jpg',
-        technologies: ['React', 'Python', 'TensorFlow', 'D3.js'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://example.com',
-        featured: true,
-        order: 1,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        _id: '2',
-        title: 'E-commerce Platform',
-        description: 'A full-stack e-commerce platform with payment processing and inventory management.',
-        image: '/images/project2.jpg',
-        technologies: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://example.com',
-        featured: true,
-        order: 2,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        _id: '3',
-        title: 'Real-time Chat Application',
-        description: 'A real-time chat application with private messaging and group chat functionality.',
-        image: '/images/project3.jpg',
-        technologies: ['React', 'Socket.io', 'Express', 'MongoDB'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://example.com',
-        featured: true,
-        order: 3,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        _id: '4',
-        title: 'Personal Finance Tracker',
-        description: 'A web application to track personal finances, expenses, and savings goals.',
-        image: '/images/project4.jpg',
-        technologies: ['React', 'Firebase', 'Chart.js', 'Tailwind CSS'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://example.com',
-        featured: false,
-        order: 4,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        _id: '5',
-        title: 'Weather Forecast App',
-        description: 'A weather forecast application with location-based services and interactive maps.',
-        image: '/images/project5.jpg',
-        technologies: ['React Native', 'OpenWeatherMap API', 'Google Maps API'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://example.com',
-        featured: false,
-        order: 5,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        _id: '6',
-        title: 'Task Management System',
-        description: 'A task management system with team collaboration features and progress tracking.',
-        image: '/images/project6.jpg',
-        technologies: ['Vue.js', 'Express', 'MongoDB', 'Socket.io'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://example.com',
-        featured: false,
-        order: 6,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    ];
+    return await getAllProjects();
   } catch (error) {
     console.error('Error fetching projects:', error);
     return [];

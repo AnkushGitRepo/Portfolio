@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Skill, SkillCategory } from '@/types';
-import { getAllSkills } from '@/lib/api';
+import { getAllSkills } from '@/lib/apiWithFallback';
 
 const SkillsSection = () => {
   const [skills, setSkills] = useState<Skill[]>([]);
@@ -13,111 +13,8 @@ const SkillsSection = () => {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        // For development, use mock data instead of API call
-        // const data = await getAllSkills();
-        const mockSkills = [
-          {
-            _id: '1',
-            name: 'React',
-            icon: '/images/react.svg',
-            category: SkillCategory.FRONTEND,
-            proficiency: 5,
-            order: 1,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '2',
-            name: 'Next.js',
-            icon: '/images/nextjs.svg',
-            category: SkillCategory.FRONTEND,
-            proficiency: 4,
-            order: 2,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '3',
-            name: 'Node.js',
-            icon: '/images/nodejs.svg',
-            category: SkillCategory.BACKEND,
-            proficiency: 4,
-            order: 1,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '4',
-            name: 'Express',
-            icon: '/images/express.svg',
-            category: SkillCategory.BACKEND,
-            proficiency: 4,
-            order: 2,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '5',
-            name: 'MongoDB',
-            icon: '/images/mongodb.svg',
-            category: SkillCategory.DATABASE,
-            proficiency: 4,
-            order: 1,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '6',
-            name: 'Python',
-            icon: '/images/python.svg',
-            category: SkillCategory.BACKEND,
-            proficiency: 5,
-            order: 3,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '7',
-            name: 'TensorFlow',
-            icon: '/images/tensorflow.svg',
-            category: SkillCategory.TOOLS,
-            proficiency: 4,
-            order: 1,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '8',
-            name: 'Docker',
-            icon: '/images/docker.svg',
-            category: SkillCategory.DEVOPS,
-            proficiency: 3,
-            order: 1,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '9',
-            name: 'AWS',
-            icon: '/images/aws.svg',
-            category: SkillCategory.DEVOPS,
-            proficiency: 3,
-            order: 2,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '10',
-            name: 'TypeScript',
-            icon: '/images/typescript.svg',
-            category: SkillCategory.FRONTEND,
-            proficiency: 4,
-            order: 3,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-        ];
-        setSkills(mockSkills);
+        const data = await getAllSkills();
+        setSkills(data);
       } catch (err) {
         setError('Failed to load skills. Please try again later.');
         console.error(err);

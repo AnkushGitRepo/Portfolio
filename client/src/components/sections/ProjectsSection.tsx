@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from '@/types';
-import { getFeaturedProjects } from '@/lib/api';
+import { getFeaturedProjects } from '@/lib/apiWithFallback';
 
 const ProjectsSection = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -14,50 +14,8 @@ const ProjectsSection = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        // For development, use mock data instead of API call
-        // const data = await getFeaturedProjects();
-        const mockProjects = [
-          {
-            _id: '1',
-            title: 'Machine Learning Dashboard',
-            description: 'A dashboard for visualizing machine learning model performance metrics.',
-            image: '/images/project1.jpg',
-            technologies: ['React', 'Python', 'TensorFlow', 'D3.js'],
-            githubUrl: 'https://github.com',
-            liveUrl: 'https://example.com',
-            featured: true,
-            order: 1,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '2',
-            title: 'E-commerce Platform',
-            description: 'A full-stack e-commerce platform with payment processing and inventory management.',
-            image: '/images/project2.jpg',
-            technologies: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
-            githubUrl: 'https://github.com',
-            liveUrl: 'https://example.com',
-            featured: true,
-            order: 2,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            _id: '3',
-            title: 'Real-time Chat Application',
-            description: 'A real-time chat application with private messaging and group chat functionality.',
-            image: '/images/project3.jpg',
-            technologies: ['React', 'Socket.io', 'Express', 'MongoDB'],
-            githubUrl: 'https://github.com',
-            liveUrl: 'https://example.com',
-            featured: true,
-            order: 3,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-        ];
-        setProjects(mockProjects);
+        const data = await getFeaturedProjects();
+        setProjects(data);
       } catch (err) {
         setError('Failed to load projects. Please try again later.');
         console.error(err);
