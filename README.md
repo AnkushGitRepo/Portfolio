@@ -90,6 +90,14 @@ The project follows the MVC (Model-View-Controller) architecture:
 
 ## Deployment
 
+### GitHub Pages Deployment (Temporary)
+
+This project is temporarily deployed on GitHub Pages. The GitHub Pages deployment only includes the frontend with mock data since GitHub Pages doesn't support backend services.
+
+**Live Demo:** [https://ankushgitrepo.github.io/Portfolio/](https://ankushgitrepo.github.io/Portfolio/)
+
+The GitHub Pages deployment is automatically updated when changes are pushed to the main branch, thanks to the GitHub Actions workflow.
+
 ### Backend Deployment
 
 1. Build the server:
