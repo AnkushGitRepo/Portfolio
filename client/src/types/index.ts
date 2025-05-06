@@ -7,9 +7,10 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   featured: boolean;
-  order: number;
+  order?: number;
+  category?: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 export enum SkillCategory {
@@ -27,9 +28,9 @@ export interface Skill {
   icon: string;
   category: SkillCategory;
   proficiency: number;
-  order: number;
-  createdAt: string;
-  updatedAt: string;
+  order?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ContactFormData {

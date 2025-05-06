@@ -1,4 +1,4 @@
-import Image from 'next/image';
+
 
 const AboutSection = () => {
   return (
@@ -21,18 +21,18 @@ const AboutSection = () => {
               ML Engineer & Full Stack Developer
             </h3>
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              I'm a passionate ML Engineer and Full Stack Developer with expertise in building
+              I&apos;m a passionate ML Engineer and Full Stack Developer with expertise in building
               intelligent and user-friendly applications. With a strong foundation in both machine
               learning and web development, I create solutions that are not only technically sound
               but also deliver exceptional user experiences.
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-6">
               My journey in technology began with a deep curiosity about how things work, which led
-              me to pursue a degree in Computer Science. Since then, I've worked on various projects
+              me to pursue a degree in Computer Science. Since then, I&apos;ve worked on various projects
               ranging from predictive analytics systems to responsive web applications.
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-8">
-              When I'm not coding, you can find me exploring new technologies, contributing to
+              When I&apos;m not coding, you can find me exploring new technologies, contributing to
               open-source projects, or sharing my knowledge through technical writing and mentoring.
             </p>
 

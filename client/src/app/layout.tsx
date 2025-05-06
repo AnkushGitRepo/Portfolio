@@ -32,18 +32,18 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.yourportfolio.com'),
+  metadataBase: new URL('https://ankushgitrepo.github.io/Portfolio'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Ankush Gupta | ML Engineer & Full Stack Developer',
     description: 'Portfolio of Ankush Gupta, an ML Engineer and Full Stack Developer specializing in building exceptional digital experiences.',
-    url: 'https://www.yourportfolio.com',
+    url: 'https://ankushgitrepo.github.io/Portfolio',
     siteName: 'Ankush Gupta Portfolio',
     images: [
       {
-        url: 'https://www.yourportfolio.com/images/og-image.jpg',
+        url: 'https://ankushgitrepo.github.io/Portfolio/images/profile_icon_image.png',
         width: 1200,
         height: 630,
         alt: 'Ankush Gupta Portfolio',
@@ -56,8 +56,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Ankush Gupta | ML Engineer & Full Stack Developer',
     description: 'Portfolio of Ankush Gupta, an ML Engineer and Full Stack Developer specializing in building exceptional digital experiences.',
-    creator: '@yourusername',
-    images: ['https://www.yourportfolio.com/images/og-image.jpg'],
+    creator: '@_ankushg',
+    images: ['https://ankushgitrepo.github.io/Portfolio/images/profile_icon_image.png'],
   },
   robots: {
     index: true,
@@ -81,7 +81,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Portfolio/favicon.ico" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

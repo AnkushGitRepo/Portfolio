@@ -18,12 +18,12 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{
           __html: generateStructuredData('WebSite', {
             name: 'Contact Ankush Gupta',
-            url: 'https://www.yourportfolio.com/contact',
+            url: 'https://ankushgitrepo.github.io/Portfolio/contact',
             description: 'Contact page for Ankush Gupta, an ML Engineer and Full Stack Developer.',
           }),
         }}
       />
-      
+
       <ContactSection />
     </MainLayout>
   );

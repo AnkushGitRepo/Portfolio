@@ -43,7 +43,8 @@ export function generateMetadata({
   };
 }
 
-export function generateStructuredData(type: 'Person' | 'WebSite' | 'Project', data: any): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function generateStructuredData(type: 'Person' | 'WebSite' | 'Project', data: Record<string, any>): string {
   let structuredData;
 
   switch (type) {

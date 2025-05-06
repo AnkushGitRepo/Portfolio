@@ -54,7 +54,7 @@ const HeroSection = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [titles.length]);
 
   // Map each title to a specific style
   // 0: Ankush Gupta - Blue
@@ -85,7 +85,7 @@ const HeroSection = () => {
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              <span>Hi, I'm </span>
+              <span>Hi, I&apos;m </span>
               <span className={`${currentStyle.text} transition-all duration-1000 ease-in-out`}>{titles[currentIndex]}</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 max-w-xl">

@@ -1,4 +1,4 @@
-import { Project, Skill, ContactFormData } from '@/types';
+import { Project, Skill, ContactFormData, SkillCategory } from '@/types';
 
 // Mock Projects
 export const projects: Project[] = [
@@ -33,73 +33,74 @@ export const skills: Skill[] = [
   {
     _id: '1',
     name: 'React',
-    category: 'frontend',
+    category: SkillCategory.FRONTEND,
     icon: 'react',
     proficiency: 90,
   },
   {
     _id: '2',
     name: 'Next.js',
-    category: 'frontend',
+    category: SkillCategory.FRONTEND,
     icon: 'nextjs',
     proficiency: 85,
   },
   {
     _id: '3',
     name: 'TypeScript',
-    category: 'language',
+    category: SkillCategory.OTHER,
     icon: 'typescript',
     proficiency: 80,
   },
   {
     _id: '4',
     name: 'Node.js',
-    category: 'backend',
+    category: SkillCategory.BACKEND,
     icon: 'nodejs',
     proficiency: 85,
   },
   {
     _id: '5',
     name: 'Express',
-    category: 'backend',
+    category: SkillCategory.BACKEND,
     icon: 'express',
     proficiency: 80,
   },
   {
     _id: '6',
     name: 'MongoDB',
-    category: 'database',
+    category: SkillCategory.DATABASE,
     icon: 'mongodb',
     proficiency: 75,
   },
   {
     _id: '7',
     name: 'Python',
-    category: 'language',
+    category: SkillCategory.OTHER,
     icon: 'python',
     proficiency: 90,
   },
   {
     _id: '8',
     name: 'TensorFlow',
-    category: 'ai',
+    category: SkillCategory.TOOLS,
     icon: 'tensorflow',
     proficiency: 80,
   },
   {
     _id: '9',
     name: 'PyTorch',
-    category: 'ai',
+    category: SkillCategory.TOOLS,
     icon: 'pytorch',
     proficiency: 75,
   },
 ];
 
 // Mock contact form submission
-export const submitMockContactForm = async (data: ContactFormData): Promise<{ success: boolean; message: string }> => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const submitMockContactForm = async (_data: ContactFormData): Promise<{ success: boolean; message: string }> => {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 1000));
-  
+
   // Always return success for mock data
   return {
     success: true,

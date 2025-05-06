@@ -18,13 +18,13 @@ export default function Home() {
         dangerouslySetInnerHTML={{
           __html: generateStructuredData('Person', {
             name: 'Ankush Gupta',
-            url: 'https://www.yourportfolio.com',
+            url: 'https://ankushgitrepo.github.io/Portfolio',
             jobTitle: 'ML Engineer & Full Stack Developer',
-            image: 'https://www.yourportfolio.com/images/profile.jpg',
+            image: 'https://ankushgitrepo.github.io/Portfolio/images/profile_icon_image.png',
             socialLinks: [
-              'https://github.com/yourusername',
-              'https://linkedin.com/in/yourusername',
-              'https://twitter.com/yourusername',
+              'https://github.com/AnkushGitRepo',
+              'https://linkedin.com/in/ankushgupta18',
+              'https://instagram.com/_ankushg',
             ],
             description: 'ML Engineer and Full Stack Developer specializing in building exceptional digital experiences.',
           }),

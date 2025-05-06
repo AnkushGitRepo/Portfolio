@@ -1,8 +1,10 @@
 import { MetadataRoute } from 'next';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.yourportfolio.com';
-  
+  const baseUrl = 'https://ankushgitrepo.github.io/Portfolio';
+
   return [
     {
       url: baseUrl,

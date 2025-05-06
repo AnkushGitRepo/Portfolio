@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import MainLayout from '@/components/layout/MainLayout';
 import { generateMetadata } from '@/lib/seo';
 import { getAllProjects } from '@/lib/apiWithFallback';
-import Image from 'next/image';
 
 export const metadata: Metadata = generateMetadata({
   title: 'Projects | Ankush Gupta',
