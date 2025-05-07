@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import MainLayout from '@/components/layout/MainLayout';
 import HeroSection from '@/components/sections/HeroSection';
+import InfoCards from '@/components/sections/InfoCards';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
+import { ThemeColorProvider } from '@/components/theme-color-context';
 
 export const metadata: Metadata = generateMetadata({
   title: 'Ankush Gupta | ML Engineer & Full Stack Developer',
@@ -11,27 +13,30 @@ export const metadata: Metadata = generateMetadata({
 
 export default function Home() {
   return (
-    <MainLayout>
-      {/* Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: generateStructuredData('Person', {
-            name: 'Ankush Gupta',
-            url: 'https://ankushgitrepo.github.io/Portfolio',
-            jobTitle: 'ML Engineer & Full Stack Developer',
-            image: 'https://ankushgitrepo.github.io/Portfolio/images/profile_icon_image.png',
-            socialLinks: [
-              'https://github.com/AnkushGitRepo',
-              'https://linkedin.com/in/ankushgupta18',
-              'https://instagram.com/_ankushg',
-            ],
-            description: 'ML Engineer and Full Stack Developer specializing in building exceptional digital experiences.',
-          }),
-        }}
-      />
+    <ThemeColorProvider>
+      <MainLayout>
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: generateStructuredData('Person', {
+              name: 'Ankush Gupta',
+              url: 'https://ankushgitrepo.github.io/Portfolio',
+              jobTitle: 'ML Engineer & Full Stack Developer',
+              image: 'https://ankushgitrepo.github.io/Portfolio/images/profile_icon_image.png',
+              socialLinks: [
+                'https://github.com/AnkushGitRepo',
+                'https://linkedin.com/in/ankushgupta18',
+                'https://instagram.com/_ankushg',
+              ],
+              description: 'ML Engineer and Full Stack Developer specializing in building exceptional digital experiences.',
+            }),
+          }}
+        />
 
-      <HeroSection />
-    </MainLayout>
+        <HeroSection />
+        <InfoCards />
+      </MainLayout>
+    </ThemeColorProvider>
   );
 }

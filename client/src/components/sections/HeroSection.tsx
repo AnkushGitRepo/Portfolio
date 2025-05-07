@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { useThemeColor } from '@/components/theme-color-context';
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -47,6 +48,9 @@ const HeroSection = () => {
     'ML Engineer'
   ];
 
+  // Get the theme color context
+  const { setCurrentColor } = useThemeColor();
+
   // Change styles and title every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,13 +60,19 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [titles.length]);
 
-  // Map each title to a specific style
+  // Map each title to a specific style and update theme color context
   // 0: Ankush Gupta - Blue
   // 1: AI Generalist - Green
   // 2: Full Stack Developer - Purple
   // 3: ML Engineer - Orange
   const styleMap = [0, 1, 2, 3]; // Maps title index to style index
   const currentStyle = styles[styleMap[currentIndex]];
+
+  // Update the theme color context when the index changes
+  useEffect(() => {
+    const colorMap = ['blue', 'green', 'purple', 'orange'];
+    setCurrentColor(colorMap[currentIndex]);
+  }, [currentIndex, setCurrentColor]);
 
   return (
     <section
