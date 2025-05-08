@@ -70,7 +70,7 @@ const HeroSection = () => {
 
   // Update the theme color context when the index changes
   useEffect(() => {
-    const colorMap = ['blue', 'green', 'purple', 'orange'];
+    const colorMap = ['blue', 'green', 'purple', 'orange'] as const;
     setCurrentColor(colorMap[currentIndex]);
   }, [currentIndex, setCurrentColor]);
 
@@ -89,19 +89,19 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 sm:px-8 py-16 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto">
           <div className="md:w-1/2 mb-10 md:mb-0 md:pr-8">
-            <div className="mb-4">
+            <div className="mb-4 text-center md:text-left">
               <span className={`inline-block px-4 py-1.5 bg-white bg-opacity-80 rounded-full text-sm font-semibold shadow-sm border border-gray-200 ${currentStyle.text} transition-colors duration-1000`}>
                 Full Stack Developer & ML Engineer
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 text-center md:text-left">
               <span>Hi, I&apos;m </span>
               <span className={`${currentStyle.text} transition-all duration-1000 ease-in-out`}>{titles[currentIndex]}</span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 max-w-xl">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 max-w-xl mx-auto md:mx-0 text-center md:text-left">
               I build exceptional intelligent systems that are fast, accessible, and visually appealing.
             </p>
-            <div className="flex flex-wrap gap-4 mb-10">
+            <div className="flex flex-wrap gap-4 mb-10 justify-center md:justify-start">
               <Link
                 href="/projects"
                 className={`px-6 py-3 ${currentStyle.button} text-white font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-110`}

@@ -3,21 +3,17 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useThemeColor, getColorClasses } from '@/components/theme-color-context'
 import SpotifyLogo from '@/components/spotify-logo'
 import {
-  Github,
-  Music,
   BookOpen,
   MapPin,
   Code,
   ExternalLink,
-  ArrowRight,
-  Headphones,
-  Heart
+  ArrowRight
 } from 'lucide-react'
 
 export default function InfoCards() {
@@ -170,19 +166,23 @@ export default function InfoCards() {
   }
 
   return (
-    <section id="about" className="py-10 bg-white">
+    <section id="about" className="py-6 bg-white">
       <div className="container px-4 md:px-6 mx-auto">
-        <div className="flex flex-col items-center mb-8">
+        <div className="flex flex-col items-center mb-4">
           <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-4 transition-colors duration-500 ${colors.light}`}>
             About Me
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-4">Get to Know Me Better</h2>
-          <div className={`w-20 h-1 rounded-full mb-4 transition-colors duration-500 ${colors.bg}`}></div>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-center mb-4">
+            <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+              Get to Know Me Better
+            </span>
+          </h2>
+          <div className={`w-20 h-1 rounded-full mb-3 transition-colors duration-500 ${colors.bg}`}></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[calc(100vh-180px)] overflow-y-auto pr-1 pb-2 custom-scrollbar">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* My Projects Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(400px,65vh)] flex flex-col">
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(500px,75vh)] flex flex-col">
             <CardHeader className={`transition-colors duration-500 ${colors.bg}`}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl font-bold text-white">My Projects</CardTitle>
@@ -222,17 +222,17 @@ export default function InfoCards() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium`}>
-                <Link href="/projects">
-                  View All Projects
-                  <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium text-left`}>
+                <Link href="/projects" className="flex items-center w-full">
+                  <span>View All Projects</span>
+                  <ArrowRight className="h-4 w-4 ml-auto transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </CardFooter>
           </Card>
 
           {/* Music Playlist Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(400px,65vh)] flex flex-col">
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(500px,75vh)] flex flex-col">
             <CardHeader className={`transition-colors duration-500 ${colors.bg}`}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl font-bold text-white">My Music</CardTitle>
@@ -250,7 +250,7 @@ export default function InfoCards() {
                 </div>
               </div>
 
-              <div className="h-[calc(100%-60px)] overflow-y-auto pr-2 space-y-2 playlist-scrollbar">
+              <div className="h-[calc(100%-50px)] overflow-y-auto pr-2 space-y-2 playlist-scrollbar">
                 {spotifyProfile.playlists.map((playlist) => (
                   <Link
                     key={playlist.id}
@@ -282,17 +282,17 @@ export default function InfoCards() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium`}>
-                <Link href={spotifyProfile.profileUrl} target="_blank" rel="noopener noreferrer">
-                  View Spotify Profile
-                  <ExternalLink className="h-4 w-4 ml-2" />
+              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium text-left`}>
+                <Link href={spotifyProfile.profileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center w-full">
+                  <span>View Spotify Profile</span>
+                  <ExternalLink className="h-4 w-4 ml-auto" />
                 </Link>
               </Button>
             </CardFooter>
           </Card>
 
           {/* Skills Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(400px,65vh)] flex flex-col">
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(500px,75vh)] flex flex-col">
             <CardHeader className={`transition-colors duration-500 ${colors.bg}`}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl font-bold text-white">Skills & Technologies</CardTitle>
@@ -301,7 +301,7 @@ export default function InfoCards() {
             </CardHeader>
             <CardContent className="pt-4 relative flex-grow overflow-hidden">
               <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
-              <div className="space-y-3 h-[calc(100%-20px)] overflow-y-auto pr-2 pb-2 custom-scrollbar">
+              <div className="space-y-3 h-[calc(100%-10px)] overflow-y-auto pr-2 pb-2 custom-scrollbar">
                 {skills.map((category, index) => (
                   <div key={index} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
                     <h3 className={`font-semibold text-${currentColor}-600 mb-3 flex items-center`}>
@@ -329,17 +329,17 @@ export default function InfoCards() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium`}>
-                <Link href="https://github.com/AnkushGitRepo">
-                  View GitHub Profile
-                  <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium text-left`}>
+                <Link href="https://github.com/AnkushGitRepo" className="flex items-center w-full">
+                  <span>View GitHub Profile</span>
+                  <ArrowRight className="h-4 w-4 ml-auto transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </CardFooter>
           </Card>
 
           {/* Books Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(400px,65vh)] md:col-span-2 lg:col-span-1 flex flex-col">
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(450px,70vh)] md:col-span-2 lg:col-span-1 flex flex-col">
             <div className="relative h-40 w-full overflow-hidden">
               <Image
                 src="/placeholder.svg"
@@ -379,18 +379,18 @@ export default function InfoCards() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium`}>
-                <Link href="/books">
-                  Explore My Bookshelf
-                  <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium text-left`}>
+                <Link href="/books" className="flex items-center w-full">
+                  <span>Explore My Bookshelf</span>
+                  <ArrowRight className="h-4 w-4 ml-auto transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </CardFooter>
           </Card>
 
           {/* Location Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(400px,65vh)] md:col-span-2 lg:col-span-2 flex flex-col">
-            <div className="relative h-40 w-full overflow-hidden">
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(450px,70vh)] md:col-span-2 lg:col-span-2 flex flex-col">
+            <div className="relative h-60 w-full overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.70717963153!2d72.43965535!3d23.0201716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1651234567890!5m2!1sen!2sin"
                 width="100%"
@@ -409,7 +409,7 @@ export default function InfoCards() {
                 <h3 className="text-xl font-bold text-white">{location.title}</h3>
               </div>
             </div>
-            <CardContent className="pt-4 flex-grow overflow-y-auto custom-scrollbar">
+            <CardContent className="pt-3 flex-grow overflow-y-auto custom-scrollbar">
               <p className="text-sm text-slate-500">{location.description}</p>
               <div className="mt-4 flex items-center flex-wrap gap-2">
                 <Badge variant="outline" className="mr-2">
@@ -422,10 +422,10 @@ export default function InfoCards() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium`}>
-                <Link href={location.mapLink} target="_blank" rel="noopener noreferrer">
-                  Open in Google Maps
-                  <ExternalLink className="h-4 w-4 ml-2" />
+              <Button asChild variant="ghost" className={`w-full justify-between group text-${currentColor}-700 hover:text-${currentColor}-800 font-medium text-left`}>
+                <Link href={location.mapLink} target="_blank" rel="noopener noreferrer" className="flex items-center w-full">
+                  <span>Open in Google Maps</span>
+                  <ExternalLink className="h-4 w-4 ml-auto" />
                 </Link>
               </Button>
             </CardFooter>

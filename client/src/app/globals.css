@@ -63,6 +63,25 @@ body {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
+@keyframes highlight {
+  0% { width: 0; left: 50%; }
+  50% { width: 100%; left: 0; }
+  100% { width: 100%; left: 0; }
+}
+
+.animate-highlight {
+  animation: highlight 1.5s ease-out forwards;
+}
+
+@keyframes textReveal {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-text-reveal {
+  animation: textReveal 1s ease-out forwards;
+}
+
 /* Custom scrollbar styles */
 .custom-scrollbar::-webkit-scrollbar,
 .playlist-scrollbar::-webkit-scrollbar {
