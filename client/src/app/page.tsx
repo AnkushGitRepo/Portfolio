@@ -23,7 +23,7 @@ export default function Home() {
               name: 'Ankush Gupta',
               url: 'https://ankushgitrepo.github.io/Portfolio',
               jobTitle: 'ML Engineer & Full Stack Developer',
-              image: 'https://ankushgitrepo.github.io/Portfolio/images/profile_icon_image.png',
+              image: `${process.env.NODE_ENV === 'production' ? 'https://ankushgitrepo.github.io' : ''}/Portfolio/images/profile_icon_image.png`,
               socialLinks: [
                 'https://github.com/AnkushGitRepo',
                 'https://linkedin.com/in/ankushgupta18',

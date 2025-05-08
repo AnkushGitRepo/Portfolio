@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { getAssetPath } from './utils';
 
 interface SEOProps {
   title: string;
@@ -13,7 +14,7 @@ export function generateMetadata({
   title,
   description,
   keywords = [],
-  ogImage = '/images/og-image.jpg',
+  ogImage = getAssetPath('/images/og-image.jpg'),
   ogType = 'website',
   twitterCard = 'summary_large_image',
 }: SEOProps): Metadata {

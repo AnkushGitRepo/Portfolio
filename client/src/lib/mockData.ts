@@ -1,4 +1,5 @@
 import { Project, Skill, ContactFormData, SkillCategory } from '@/types';
+import { getAssetPath } from './utils';
 
 // Mock Projects
 export const projects: Project[] = [
@@ -6,7 +7,7 @@ export const projects: Project[] = [
     _id: '1',
     title: 'Portfolio Website',
     description: 'A modern portfolio website built with Next.js and Express',
-    image: '/images/projects/portfolio.jpg',
+    image: getAssetPath('/images/projects/portfolio.jpg'),
     technologies: ['Next.js', 'React', 'TypeScript', 'Express', 'MongoDB'],
     githubUrl: 'https://github.com/AnkushGitRepo/Portfolio',
     liveUrl: 'https://ankushgitrepo.github.io/Portfolio/',
@@ -18,7 +19,7 @@ export const projects: Project[] = [
     _id: '2',
     title: 'AI Project',
     description: 'An artificial intelligence project showcasing machine learning capabilities',
-    image: '/images/projects/ai.jpg',
+    image: getAssetPath('/images/projects/ai.jpg'),
     technologies: ['Python', 'TensorFlow', 'PyTorch', 'Scikit-learn'],
     githubUrl: 'https://github.com/AnkushGitRepo/ai-project',
     liveUrl: 'https://example.com/ai-project',

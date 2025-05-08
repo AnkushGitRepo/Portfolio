@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useThemeColor, getColorClasses } from '@/components/theme-color-context'
 import SpotifyLogo from '@/components/spotify-logo'
+import { getAssetPath } from '@/lib/utils'
 import {
   BookOpen,
   MapPin,
@@ -25,7 +26,7 @@ export default function InfoCards() {
       id: 1,
       title: "Pharmacy Management System",
       description: "A console-based system using Java and PostgreSQL for managing drug inventory and transactions.",
-      image: "/images/projects/pharmacy-system.jpg",
+      image: getAssetPath("/images/projects/pharmacy-system.jpg"),
       link: "/projects/pharmacy-management-system",
       githubUrl: "https://github.com/AnkushGitRepo/Pharmacy-Management-System",
       tags: ["Java", "PostgreSQL", "Console App"]
@@ -34,7 +35,7 @@ export default function InfoCards() {
       id: 2,
       title: "Currency Converter",
       description: "Java console application allowing users to view, convert, and update exchange rates.",
-      image: "/images/projects/currency-converter.jpg",
+      image: getAssetPath("/images/projects/currency-converter.jpg"),
       link: "/projects/currency-converter",
       githubUrl: "https://github.com/AnkushGitRepo/Currency_Converter_Using_Core_Java",
       tags: ["Java", "Console App"]
@@ -43,7 +44,7 @@ export default function InfoCards() {
       id: 3,
       title: "Cashflow Compass",
       description: "Python-based CLI Expense Tracker for managing and analyzing expenses.",
-      image: "/images/projects/cashflow-compass.jpg",
+      image: getAssetPath("/images/projects/cashflow-compass.jpg"),
       link: "/projects/cashflow-compass",
       githubUrl: "https://github.com/AnkushGitRepo/Cashflow-Compass",
       tags: ["Python", "CLI", "Finance"]
@@ -54,44 +55,44 @@ export default function InfoCards() {
     {
       category: "Languages",
       items: [
-        { name: "Java", icon: "/images/skills/icons8-java.svg" },
-        { name: "Python", icon: "/images/skills/icons8-python.svg" },
-        { name: "JavaScript", icon: "/images/skills/icons8-javascript.svg" },
-        { name: "HTML", icon: "/images/skills/icons8-html5.svg" },
-        { name: "CSS", icon: "/images/skills/icons8-css.svg" },
-        { name: "TypeScript", icon: "/images/skills/icons8-typescript.svg" }
+        { name: "Java", icon: getAssetPath("/images/skills/icons8-java.svg") },
+        { name: "Python", icon: getAssetPath("/images/skills/icons8-python.svg") },
+        { name: "JavaScript", icon: getAssetPath("/images/skills/icons8-javascript.svg") },
+        { name: "HTML", icon: getAssetPath("/images/skills/icons8-html5.svg") },
+        { name: "CSS", icon: getAssetPath("/images/skills/icons8-css.svg") },
+        { name: "TypeScript", icon: getAssetPath("/images/skills/icons8-typescript.svg") }
       ]
     },
     {
       category: "Frameworks & Libraries",
       items: [
-        { name: "React", icon: "/images/skills/icons8-react.svg" },
-        { name: "Node.js", icon: "/images/skills/icons8-nodejs.svg" },
-        { name: "Express.js", icon: "/images/skills/icons8-express-js.svg" },
-        { name: "Bootstrap", icon: "/images/skills/icons8-bootstrap.svg" },
-        { name: "Tailwind CSS", icon: "/images/skills/icons8-tailwind-css.svg" }
+        { name: "React", icon: getAssetPath("/images/skills/icons8-react.svg") },
+        { name: "Node.js", icon: getAssetPath("/images/skills/icons8-nodejs.svg") },
+        { name: "Express.js", icon: getAssetPath("/images/skills/icons8-express-js.svg") },
+        { name: "Bootstrap", icon: getAssetPath("/images/skills/icons8-bootstrap.svg") },
+        { name: "Tailwind CSS", icon: getAssetPath("/images/skills/icons8-tailwind-css.svg") }
       ]
     },
     {
       category: "Databases",
       items: [
-        { name: "MySQL", icon: "/images/skills/icons8-mysql.svg" },
-        { name: "PostgreSQL", icon: "/images/skills/icons8-postgres.svg" },
-        { name: "MongoDB", icon: "/images/skills/MongoDB.svg" },
-        { name: "Redis", icon: "/images/skills/icons8-redis.svg" }
+        { name: "MySQL", icon: getAssetPath("/images/skills/icons8-mysql.svg") },
+        { name: "PostgreSQL", icon: getAssetPath("/images/skills/icons8-postgres.svg") },
+        { name: "MongoDB", icon: getAssetPath("/images/skills/MongoDB.svg") },
+        { name: "Redis", icon: getAssetPath("/images/skills/icons8-redis.svg") }
       ]
     },
     {
       category: "Tools & IDEs",
       items: [
-        { name: "Git", icon: "/images/skills/icons8-git.svg" },
-        { name: "GitHub", icon: "/images/skills/icons8-github.svg" },
-        { name: "VS Code", icon: "/images/skills/icons8-visual-studio.svg" },
-        { name: "IntelliJ IDEA", icon: "/images/skills/icons8-intellij-idea.svg" },
-        { name: "PyCharm", icon: "/images/skills/icons8-pycharm.svg" },
-        { name: "WebStorm", icon: "/images/skills/icons8-webstorm.svg" },
-        { name: "Jupyter", icon: "/images/skills/icons8-jupyter.svg" },
-        { name: "Figma", icon: "/images/skills/icons8-figma.svg" }
+        { name: "Git", icon: getAssetPath("/images/skills/icons8-git.svg") },
+        { name: "GitHub", icon: getAssetPath("/images/skills/icons8-github.svg") },
+        { name: "VS Code", icon: getAssetPath("/images/skills/icons8-visual-studio.svg") },
+        { name: "IntelliJ IDEA", icon: getAssetPath("/images/skills/icons8-intellij-idea.svg") },
+        { name: "PyCharm", icon: getAssetPath("/images/skills/icons8-pycharm.svg") },
+        { name: "WebStorm", icon: getAssetPath("/images/skills/icons8-webstorm.svg") },
+        { name: "Jupyter", icon: getAssetPath("/images/skills/icons8-jupyter.svg") },
+        { name: "Figma", icon: getAssetPath("/images/skills/icons8-figma.svg") }
       ]
     }
   ]
@@ -155,7 +156,7 @@ export default function InfoCards() {
     title: "What I'm Reading",
     description: "Explore my collection of book reviews and recommendations.",
     link: "/books",
-    image: "/placeholder.svg"
+    image: getAssetPath("/placeholder.svg")
   }
 
   const location = {
@@ -342,7 +343,7 @@ export default function InfoCards() {
           <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(450px,70vh)] md:col-span-2 lg:col-span-1 flex flex-col">
             <div className="relative h-40 w-full overflow-hidden">
               <Image
-                src="/placeholder.svg"
+                src={getAssetPath("/placeholder.svg")}
                 alt="Books placeholder"
                 fill
                 className="object-cover transition-transform hover:scale-105"

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useThemeColor } from '@/components/theme-color-context';
+import { getAssetPath } from '@/lib/utils';
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -109,7 +110,7 @@ const HeroSection = () => {
                 View My Work
               </Link>
               <a
-                href="/resume.pdf"
+                href={getAssetPath("/resume.pdf")}
                 download
                 className="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:scale-110"
               >
@@ -181,7 +182,7 @@ const HeroSection = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white shadow-xl">
               <div className={`w-full h-full ${currentStyle.profileBg} transition-colors duration-1000 relative`}>
                 <Image
-                  src="/images/profile_icon_image.png"
+                  src={getAssetPath("/images/profile_icon_image.png")}
                   alt="Ankush Gupta"
                   fill
                   sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"

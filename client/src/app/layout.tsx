@@ -81,7 +81,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/Portfolio/favicon.ico" />
+        <link rel="icon" href={process.env.NODE_ENV === 'production' ? '/Portfolio/favicon.ico' : '/favicon.ico'} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
