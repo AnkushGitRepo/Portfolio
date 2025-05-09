@@ -46,7 +46,8 @@ const HeroSection = () => {
     'Ankush Gupta',
     'AI Generalist',
     'Full Stack Developer',
-    'ML Engineer'
+    'ML Engineer',
+    'UPDATED TITLE'
   ];
 
   // Get the theme color context
