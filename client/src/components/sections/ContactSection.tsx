@@ -2,13 +2,17 @@
 
 import { useState, FormEvent } from 'react';
 import { submitContactForm } from '@/lib/apiWithFallback';
-import { ContactFormData } from '@/types';
+import { ContactFormData, ContactReason } from '@/types';
+import { useThemeColor, getColorClasses } from '@/components/theme-color-context';
 
 const ContactSection = () => {
+  const { currentColor } = useThemeColor();
+  const colors = getColorClasses(currentColor);
+
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
-    subject: '',
+    contactReason: ContactReason.JOB_OPPORTUNITY,
     message: '',
   });
 
@@ -19,10 +23,15 @@ const ContactSection = () => {
   } | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleReasonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as ContactReason;
+    setFormData((prev) => ({ ...prev, contactReason: value }));
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -39,7 +48,7 @@ const ContactSection = () => {
       setFormData({
         name: '',
         email: '',
-        subject: '',
+        contactReason: ContactReason.JOB_OPPORTUNITY,
         message: '',
       });
     } catch (error) {
@@ -63,7 +72,7 @@ const ContactSection = () => {
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Have a question or want to work together? Feel free to contact me!
           </p>
-          <div className="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+          <div className={`w-20 h-1 ${colors.bg} mx-auto mt-4`}></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -235,20 +244,25 @@ const ContactSection = () => {
               </div>
               <div>
                 <label
-                  htmlFor="subject"
+                  htmlFor="contactReason"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >
-                  Subject
+                  Reason for Contact
                 </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
+                <select
+                  id="contactReason"
+                  name="contactReason"
+                  value={formData.contactReason}
+                  onChange={handleReasonChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-                />
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-2 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                >
+                  {Object.values(ContactReason).map((reason) => (
+                    <option key={reason} value={reason}>
+                      {reason}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label
@@ -283,7 +297,7 @@ const ContactSection = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`w-full px-6 py-3 ${colors.bg} ${colors.hover} text-white font-medium rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-md hover:shadow-lg`}
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
