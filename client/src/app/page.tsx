@@ -8,7 +8,7 @@ import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { ThemeColorProvider } from '@/components/theme-color-context';
 
 export const metadata: Metadata = generateMetadata({
-  title: 'Ankush Gupta | ML Engineer & Full Stack Developer - Updated',
+  title: 'Ankush Gupta | ML Engineer & Full Stack Developer',
   description: 'Portfolio of Ankush Gupta, an ML Engineer and Full Stack Developer specializing in building exceptional digital experiences.',
   keywords: ['ML Engineer', 'Full Stack Developer', 'React', 'Next.js', 'Node.js', 'MongoDB', 'Express'],
 });

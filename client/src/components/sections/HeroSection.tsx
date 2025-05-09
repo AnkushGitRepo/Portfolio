@@ -46,8 +46,7 @@ const HeroSection = () => {
     'Ankush Gupta',
     'AI Generalist',
     'Full Stack Developer',
-    'ML Engineer',
-    'UPDATED TITLE'
+    'ML Engineer'
   ];
 
   // Get the theme color context
@@ -67,13 +66,12 @@ const HeroSection = () => {
   // 1: AI Generalist - Green
   // 2: Full Stack Developer - Purple
   // 3: ML Engineer - Orange
-  // 4: UPDATED TITLE - Blue (reusing the first style)
-  const styleMap = [0, 1, 2, 3, 0]; // Maps title index to style index
+  const styleMap = [0, 1, 2, 3]; // Maps title index to style index
   const currentStyle = styles[styleMap[currentIndex]];
 
   // Update the theme color context when the index changes
   useEffect(() => {
-    const colorMap = ['blue', 'green', 'purple', 'orange', 'blue'] as const;
+    const colorMap = ['blue', 'green', 'purple', 'orange'] as const;
     setCurrentColor(colorMap[currentIndex]);
   }, [currentIndex, setCurrentColor]);
 
