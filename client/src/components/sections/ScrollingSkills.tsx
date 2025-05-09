@@ -35,15 +35,30 @@ const skillsList = [
 const extendedSkillsList = [...skillsList, ...skillsList, ...skillsList];
 
 const ScrollingSkills = () => {
+  // Define the keyframes style
+  const keyframesStyle = `
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @keyframes marquee2 {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(0); }
+    }
+  `;
 
   return (
     <section className="py-12 overflow-hidden bg-white relative">
+      {/* Add the keyframes style */}
+      <style dangerouslySetInnerHTML={{ __html: keyframesStyle }} />
+
       {/* Background elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
 
       {/* Single row of scrolling skills - moves left */}
       <div className="relative flex overflow-x-hidden py-8">
-        <div className="animate-marquee whitespace-nowrap flex items-center">
+        <div className="whitespace-nowrap flex items-center" style={{ animation: 'marquee 60s linear infinite' }}>
           {extendedSkillsList.map((skill, index) => (
             <div
               key={`skill-${index}`}
@@ -64,7 +79,7 @@ const ScrollingSkills = () => {
           ))}
         </div>
 
-        <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex items-center py-8">
+        <div className="absolute top-0 whitespace-nowrap flex items-center py-8" style={{ animation: 'marquee2 60s linear infinite' }}>
           {extendedSkillsList.map((skill, index) => (
             <div
               key={`skill-dup-${index}`}
