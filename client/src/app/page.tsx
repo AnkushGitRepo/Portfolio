@@ -2,11 +2,13 @@ import { Metadata } from 'next';
 import MainLayout from '@/components/layout/MainLayout';
 import HeroSection from '@/components/sections/HeroSection';
 import InfoCards from '@/components/sections/InfoCards';
+import ScrollingSkills from '@/components/sections/ScrollingSkills';
+import HomeContactSection from '@/components/sections/HomeContactSection';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { ThemeColorProvider } from '@/components/theme-color-context';
 
 export const metadata: Metadata = generateMetadata({
-  title: 'Ankush Gupta | ML Engineer & Full Stack Developer',
+  title: 'Ankush Gupta | ML Engineer & Full Stack Developer - Updated',
   description: 'Portfolio of Ankush Gupta, an ML Engineer and Full Stack Developer specializing in building exceptional digital experiences.',
   keywords: ['ML Engineer', 'Full Stack Developer', 'React', 'Next.js', 'Node.js', 'MongoDB', 'Express'],
 });
@@ -36,6 +38,8 @@ export default function Home() {
 
         <HeroSection />
         <InfoCards />
+        <ScrollingSkills />
+        <HomeContactSection />
       </MainLayout>
     </ThemeColorProvider>
   );
