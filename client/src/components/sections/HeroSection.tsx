@@ -67,12 +67,13 @@ const HeroSection = () => {
   // 1: AI Generalist - Green
   // 2: Full Stack Developer - Purple
   // 3: ML Engineer - Orange
-  const styleMap = [0, 1, 2, 3]; // Maps title index to style index
+  // 4: UPDATED TITLE - Blue (reusing the first style)
+  const styleMap = [0, 1, 2, 3, 0]; // Maps title index to style index
   const currentStyle = styles[styleMap[currentIndex]];
 
   // Update the theme color context when the index changes
   useEffect(() => {
-    const colorMap = ['blue', 'green', 'purple', 'orange'] as const;
+    const colorMap = ['blue', 'green', 'purple', 'orange', 'blue'] as const;
     setCurrentColor(colorMap[currentIndex]);
   }, [currentIndex, setCurrentColor]);
 
