@@ -33,9 +33,17 @@ export interface Skill {
   updatedAt?: string;
 }
 
+export enum ContactReason {
+  JOB_OPPORTUNITY = 'Job Opportunity',
+  PROJECT_COLLABORATION = 'Project Collaboration',
+  CONSULTING = 'Consulting',
+  GENERAL_INQUIRY = 'General Inquiry',
+  OTHER = 'Other'
+}
+
 export interface ContactFormData {
   name: string;
   email: string;
-  subject: string;
+  contactReason: ContactReason;
   message: string;
 }
