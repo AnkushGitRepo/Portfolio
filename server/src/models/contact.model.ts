@@ -1,9 +1,17 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
+export enum ContactReason {
+  JOB_OPPORTUNITY = 'Job Opportunity',
+  PROJECT_COLLABORATION = 'Project Collaboration',
+  CONSULTING = 'Consulting',
+  GENERAL_INQUIRY = 'General Inquiry',
+  OTHER = 'Other'
+}
+
 export interface IContact extends Document {
   name: string;
   email: string;
-  subject: string;
+  contactReason: ContactReason;
   message: string;
   read: boolean;
   createdAt: Date;
@@ -27,10 +35,11 @@ const ContactSchema: Schema = new Schema(
         'Please provide a valid email address',
       ],
     },
-    subject: {
+    contactReason: {
       type: String,
-      required: [true, 'Subject is required'],
-      trim: true,
+      enum: Object.values(ContactReason),
+      required: [true, 'Reason for contact is required'],
+      default: ContactReason.JOB_OPPORTUNITY,
     },
     message: {
       type: String,

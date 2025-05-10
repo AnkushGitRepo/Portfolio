@@ -17,7 +17,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     <div className="flex flex-col min-h-screen">
       {!isHomePage && <Header />}
       <main className={`flex-grow ${!isHomePage ? 'pt-16' : ''}`}>{children}</main>
-      {!isHomePage && <Footer />}
+      <Footer />
     </div>
   );
 };
