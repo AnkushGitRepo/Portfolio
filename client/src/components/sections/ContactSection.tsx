@@ -1,13 +1,59 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { submitContactForm } from '@/lib/apiWithFallback';
 import { ContactFormData, ContactReason } from '@/types';
 import { useThemeColor, getColorClasses } from '@/components/theme-color-context';
+import { Mail, MapPin, Phone, Github, Linkedin, Instagram, ExternalLink } from 'lucide-react';
 
 const ContactSection = () => {
   const { currentColor } = useThemeColor();
   const colors = getColorClasses(currentColor);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Define styles matching HeroSection.tsx
+  const styles = [
+    {
+      bg: 'from-blue-50 to-blue-100',
+      text: 'text-blue-600',
+      button: 'bg-blue-600 hover:bg-blue-700',
+      profileBg: 'bg-blue-200',
+      profileText: 'text-blue-800'
+    },
+    {
+      bg: 'from-green-50 to-green-100',
+      text: 'text-green-600',
+      button: 'bg-green-600 hover:bg-green-700',
+      profileBg: 'bg-green-200',
+      profileText: 'text-green-800'
+    },
+    {
+      bg: 'from-purple-50 to-purple-100',
+      text: 'text-purple-600',
+      button: 'bg-purple-600 hover:bg-purple-700',
+      profileBg: 'bg-purple-200',
+      profileText: 'text-purple-800'
+    },
+    {
+      bg: 'from-orange-50 to-orange-100',
+      text: 'text-orange-600',
+      button: 'bg-orange-600 hover:bg-orange-700',
+      profileBg: 'bg-orange-200',
+      profileText: 'text-orange-800'
+    }
+  ];
+
+  // Set up color cycling
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % styles.length);
+    }, 3000); // Change color every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [styles.length]);
+
+  // Get current style
+  const currentStyle = styles[currentIndex];
 
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
@@ -63,29 +109,42 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-800" id="contact">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Get In Touch
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Have a question or want to work together? Feel free to contact me!
-          </p>
-          <div className={`w-20 h-1 ${colors.bg} mx-auto mt-4`}></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Contact Information
-            </h3>
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
+    <div className="flex flex-col p-0 m-0" id="contact">
+      <div className="flex flex-col lg:flex-row w-full h-full p-0 m-0">
+        {/* Left Column - Contact Information */}
+        <div className={`bg-gradient-to-r ${currentStyle.bg} p-8 transition-colors duration-300 relative overflow-hidden text-left lg:w-1/2 flex flex-col justify-start m-0`}>
+          <h3 className={`text-2xl font-bold ${currentStyle.text} mb-6 text-center`}>
+            Contact Information
+          </h3>
+          <div className={`space-y-6 relative z-10 ${currentStyle.text} text-left`}>
+            <div className="flex items-start group">
+              <div className={`flex-shrink-0 ${currentStyle.profileBg} p-3 rounded-full transition-all duration-300 group-hover:scale-110`}>
+                <Mail className={`h-6 w-6 ${currentStyle.profileText}`} />
+              </div>
+              <div className="ml-4">
+                <h4 className={`text-lg font-semibold ${currentStyle.profileText}`}>Email</h4>
+                <a href="mailto:ankushgupta1806@gmail.com" className={`${currentStyle.text} hover:${currentStyle.profileText} transition-colors duration-300`}>
+                  ankushgupta1806@gmail.com
+                </a>
+              </div>
+            </div>
+            <div className="flex items-start group">
+              <div className={`flex-shrink-0 ${currentStyle.profileBg} p-3 rounded-full transition-all duration-300 group-hover:scale-110`}>
+                <Phone className={`h-6 w-6 ${currentStyle.profileText}`} />
+              </div>
+              <div className="ml-4">
+                <h4 className={`text-lg font-semibold ${currentStyle.profileText}`}>Phone</h4>
+                <a href="tel:+917202906881" className={`${currentStyle.text} hover:${currentStyle.profileText} transition-colors duration-300`}>
+                  +91 7202906881
+                </a>
+              </div>
+            </div>
+            <div className="flex items-start group">
+              <div className={`flex-shrink-0 ${currentStyle.profileBg} p-3 rounded-full transition-all duration-300 group-hover:scale-110`}>
+                <div className="h-6 w-6 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-600 dark:text-blue-400"
+                    className={`h-6 w-6 ${currentStyle.profileText}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -94,127 +153,101 @@ const ContactSection = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
                     />
                   </svg>
-                </div>
-                <div className="ml-4">
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Email</h4>
-                  <p className="text-gray-700 dark:text-gray-300">ankushgupta1806@gmail.com</p>
                 </div>
               </div>
-              <div className="flex items-start">
-                <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-600 dark:text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+              <div className="ml-4">
+                <h4 className={`text-lg font-semibold ${currentStyle.profileText}`}>Social</h4>
+                <div className="flex space-x-4 mt-2">
+                  <a
+                    href="https://github.com/AnkushGitRepo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${currentStyle.text} hover:${currentStyle.profileText} transition-colors duration-300 transform hover:scale-110`}
+                    aria-label="GitHub"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Location</h4>
-                  <p className="text-gray-700 dark:text-gray-300">Bangalore, India</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-600 dark:text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    <Github className={`h-6 w-6 ${currentStyle.profileText}`} />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/ankushgupta18"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${currentStyle.text} hover:${currentStyle.profileText} transition-colors duration-300 transform hover:scale-110`}
+                    aria-label="LinkedIn"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
-                    />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Social</h4>
-                  <div className="flex space-x-4 mt-2">
-                    <a
-                      href="https://github.com/AnkushGitRepo"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                      aria-label="GitHub"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://linkedin.com/in/ankushgupta18"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                      aria-label="LinkedIn"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://instagram.com/_ankushg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                      aria-label="Twitter"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-                      </svg>
-                    </a>
-                  </div>
+                    <Linkedin className={`h-6 w-6 ${currentStyle.profileText}`} />
+                  </a>
+                  <a
+                    href="https://instagram.com/_ankushg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${currentStyle.text} hover:${currentStyle.profileText} transition-colors duration-300 transform hover:scale-110`}
+                    aria-label="Instagram"
+                  >
+                    <Instagram className={`h-6 w-6 ${currentStyle.profileText}`} />
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            <div className="flex items-start group mt-8">
+              <div className={`flex-shrink-0 ${currentStyle.profileBg} p-3 rounded-full transition-all duration-300 group-hover:scale-110`}>
+                <MapPin className={`h-6 w-6 ${currentStyle.profileText}`} />
+              </div>
+              <div className="ml-4">
+                <h4 className={`text-lg font-semibold ${currentStyle.profileText}`}>Location</h4>
+                <p className={`${currentStyle.text}`}>A-1201, Suryam Ananta, Vastral</p>
+                <p className={`${currentStyle.text}`}>Ahmedabad, Gujarat, India 382418</p>
+
+                <div className="mt-4 relative h-48 w-full rounded-lg overflow-hidden shadow-md">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.70717963153!2d72.43965535!3d23.0201716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1651234567890!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0"
+                  ></iframe>
+                </div>
+
+                <a
+                  href="https://maps.google.com/?q=A-1201,+Suryam+Ananta,+Vastral,+Ahmedabad,+Gujarat,+India+382418"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`mt-2 inline-flex items-center text-sm ${currentStyle.text} hover:${currentStyle.profileText} hover:underline`}
                 >
-                  Name
-                </label>
+                  <ExternalLink className={`h-4 w-4 mr-1 ${currentStyle.profileText}`} /> View on Google Maps
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column - Send Message Form */}
+        <div className="bg-white p-8 transition-all duration-500 relative overflow-y-auto lg:w-1/2 flex flex-col">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Get In Touch
+            </h2>
+            <p className="text-gray-600">
+              Have a question or want to work together? Feel free to contact me!
+            </p>
+            <div className={`w-20 h-1 ${currentStyle.button} mt-4 mx-auto`}></div>
+          </div>
+          <h3 className={`text-2xl font-bold ${currentStyle.text} mb-6 text-left`}>Send a Message</h3>
+          <form onSubmit={handleSubmit} className="space-y-6 text-left">
+            <div className="group">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-600 transition-colors duration-200 text-left"
+              >
+                Name
+              </label>
+              <div className="relative">
                 <input
                   type="text"
                   id="name"
@@ -222,16 +255,19 @@ const ContactSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:${colors.border} focus:ring-2 focus:ring-opacity-50 focus:border-transparent bg-white text-gray-900 transition-all duration-300`}
+                  placeholder="Your name"
                 />
               </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  Email
-                </label>
+            </div>
+            <div className="group">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-600 transition-colors duration-200 text-left"
+              >
+                Email
+              </label>
+              <div className="relative">
                 <input
                   type="email"
                   id="email"
@@ -239,23 +275,26 @@ const ContactSection = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:${colors.border} focus:ring-2 focus:ring-opacity-50 focus:border-transparent bg-white text-gray-900 transition-all duration-300`}
+                  placeholder="your.email@example.com"
                 />
               </div>
-              <div>
-                <label
-                  htmlFor="contactReason"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  Reason for Contact
-                </label>
+            </div>
+            <div className="group">
+              <label
+                htmlFor="contactReason"
+                className="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-600 transition-colors duration-200 text-left"
+              >
+                Reason for Contact
+              </label>
+              <div className="relative">
                 <select
                   id="contactReason"
                   name="contactReason"
                   value={formData.contactReason}
                   onChange={handleReasonChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-2 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:${colors.border} focus:ring-2 focus:ring-opacity-50 focus:border-transparent bg-white text-gray-900 transition-all duration-300 appearance-none`}
                 >
                   {Object.values(ContactReason).map((reason) => (
                     <option key={reason} value={reason}>
@@ -263,14 +302,21 @@ const ContactSection = () => {
                     </option>
                   ))}
                 </select>
+                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
               </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  Message
-                </label>
+            </div>
+            <div className="group">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-600 transition-colors duration-200 text-left"
+              >
+                Message
+              </label>
+              <div className="relative">
                 <textarea
                   id="message"
                   name="message"
@@ -278,34 +324,45 @@ const ContactSection = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:${colors.border} focus:ring-2 focus:ring-opacity-50 focus:border-transparent bg-white text-gray-900 transition-all duration-300`}
+                  placeholder="Your message here..."
                 ></textarea>
               </div>
+            </div>
 
-              {submitStatus && (
-                <div
-                  className={`p-4 rounded-lg ${
-                    submitStatus.success
-                      ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
-                      : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
-                  }`}
-                >
-                  {submitStatus.message}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full px-6 py-3 ${colors.bg} ${colors.hover} text-white font-medium rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-md hover:shadow-lg`}
+            {submitStatus && (
+              <div
+                className={`p-4 rounded-lg ${
+                  submitStatus.success
+                    ? `${colors.light}`
+                    : 'bg-red-100 text-red-800'
+                } transition-all duration-300 animate-fadeIn`}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
-            </form>
-          </div>
+                {submitStatus.message}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full px-6 py-3 ${currentStyle.button} text-white font-medium rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 shadow-md hover:shadow-lg text-center`}
+            >
+              {isSubmitting ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </span>
+              ) : (
+                'Send Message'
+              )}
+            </button>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

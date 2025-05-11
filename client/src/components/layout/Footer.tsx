@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useThemeColor, getColorClasses } from '@/components/theme-color-context';
 
@@ -7,18 +8,63 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { currentColor } = useThemeColor();
   const colors = getColorClasses(currentColor);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Define styles matching HeroSection.tsx
+  const styles = [
+    {
+      bg: 'from-blue-50 to-blue-100',
+      text: 'text-blue-600',
+      button: 'bg-blue-600 hover:bg-blue-700',
+      profileBg: 'bg-blue-200',
+      profileText: 'text-blue-800'
+    },
+    {
+      bg: 'from-green-50 to-green-100',
+      text: 'text-green-600',
+      button: 'bg-green-600 hover:bg-green-700',
+      profileBg: 'bg-green-200',
+      profileText: 'text-green-800'
+    },
+    {
+      bg: 'from-purple-50 to-purple-100',
+      text: 'text-purple-600',
+      button: 'bg-purple-600 hover:bg-purple-700',
+      profileBg: 'bg-purple-200',
+      profileText: 'text-purple-800'
+    },
+    {
+      bg: 'from-orange-50 to-orange-100',
+      text: 'text-orange-600',
+      button: 'bg-orange-600 hover:bg-orange-700',
+      profileBg: 'bg-orange-200',
+      profileText: 'text-orange-800'
+    }
+  ];
+
+  // Set up color cycling
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % styles.length);
+    }, 3000); // Change color every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [styles.length]);
+
+  // Get current style
+  const currentStyle = styles[currentIndex];
 
   return (
     <footer className="relative py-12 border-t border-gray-100 overflow-hidden shadow-sm bg-white">
       {/* Background layers - lower z-index */}
       <div className="absolute inset-0 z-0">
         {/* Dynamic gradient background based on theme */}
-        <div className={`absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-${currentColor}-50 opacity-20`}></div>
+        <div className={`absolute inset-0 bg-gradient-to-br ${currentStyle.bg} opacity-20`}></div>
         {/* Subtle pattern overlay */}
         <div className="absolute inset-0 bg-grid-pattern opacity-3"></div>
         {/* Decorative circles */}
-        <div className={`absolute -right-20 -bottom-20 w-64 h-64 rounded-full ${colors.bg} opacity-10`}></div>
-        <div className={`absolute -left-20 -top-20 w-64 h-64 rounded-full ${colors.bg} opacity-10`}></div>
+        <div className={`absolute -right-20 -bottom-20 w-64 h-64 rounded-full ${currentStyle.button} opacity-10`}></div>
+        <div className={`absolute -left-20 -top-20 w-64 h-64 rounded-full ${currentStyle.button} opacity-10`}></div>
         {/* Additional subtle texture */}
         <div className="absolute inset-0 bg-noise opacity-[0.02]"></div>
       </div>
@@ -27,18 +73,18 @@ const Footer = () => {
       <div className={`absolute top-0 left-0 right-0 h-1 ${colors.bg} z-10`}></div>
 
       {/* Additional decorative elements */}
-      <div className={`absolute top-12 right-12 w-24 h-24 rounded-full ${colors.bg} opacity-5 blur-xl`}></div>
-      <div className={`absolute bottom-12 left-12 w-32 h-32 rounded-full ${colors.bg} opacity-5 blur-xl`}></div>
+      <div className={`absolute top-12 right-12 w-24 h-24 rounded-full ${currentStyle.button} opacity-5 blur-xl`}></div>
+      <div className={`absolute bottom-12 left-12 w-32 h-32 rounded-full ${currentStyle.button} opacity-5 blur-xl`}></div>
       <div className="container mx-auto px-4 relative z-20">
         {/* Animated gradient line */}
         <div className="relative h-0.5 w-full mb-10 overflow-hidden">
-          <div className={`absolute inset-0 ${colors.bg} opacity-70`}></div>
+          <div className={`absolute inset-0 ${currentStyle.button} opacity-70`}></div>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent w-1/3 animate-shimmer"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About Column */}
           <div className="md:col-span-1">
-            <h3 className={`text-xl font-bold ${colors.text} mb-4 drop-shadow-sm`}>Ankush Gupta</h3>
+            <h3 className={`text-xl font-bold ${currentStyle.text} mb-4 drop-shadow-sm`}>Ankush Gupta</h3>
             <p className="text-gray-700 mb-4">
               ML Engineer & Full Stack Developer specializing in building exceptional digital experiences.
             </p>
@@ -47,7 +93,7 @@ const Footer = () => {
                 href="https://github.com/AnkushGitRepo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 aria-label="GitHub"
               >
                 <svg
@@ -63,7 +109,7 @@ const Footer = () => {
                 href="https://linkedin.com/in/ankushgupta18"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 aria-label="LinkedIn"
               >
                 <svg
@@ -79,7 +125,7 @@ const Footer = () => {
                 href="https://instagram.com/_ankushg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 aria-label="Instagram"
               >
                 <svg
@@ -116,12 +162,12 @@ const Footer = () => {
 
           {/* Main Links Column */}
           <div className="md:col-span-1">
-            <h3 className={`text-xl font-bold ${colors.text} mb-4 drop-shadow-sm`}>Main Pages</h3>
+            <h3 className={`text-xl font-bold ${currentStyle.text} mb-4 drop-shadow-sm`}>Main Pages</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Home
                 </Link>
@@ -129,7 +175,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/about"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   About Me
                 </Link>
@@ -137,7 +183,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/projects"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Projects
                 </Link>
@@ -145,7 +191,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/skills"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Skills
                 </Link>
@@ -153,7 +199,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/contact"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Contact Me
                 </Link>
@@ -163,12 +209,12 @@ const Footer = () => {
 
           {/* Resources Column */}
           <div className="md:col-span-1">
-            <h3 className={`text-xl font-bold ${colors.text} mb-4 drop-shadow-sm`}>Resources</h3>
+            <h3 className={`text-xl font-bold ${currentStyle.text} mb-4 drop-shadow-sm`}>Resources</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/books"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Books
                 </Link>
@@ -176,7 +222,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/articles"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Articles
                 </Link>
@@ -184,7 +230,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/certifications"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Certifications
                 </Link>
@@ -194,7 +240,7 @@ const Footer = () => {
                   href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+                  className={`text-gray-700 hover:${currentStyle.text} transition-colors duration-300 font-medium`}
                 >
                   Resume
                 </a>
@@ -204,7 +250,7 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div className="md:col-span-1">
-            <h3 className={`text-xl font-bold ${colors.text} mb-4 drop-shadow-sm`}>Contact</h3>
+            <h3 className={`text-xl font-bold ${currentStyle.text} mb-4 drop-shadow-sm`}>Contact</h3>
             <p className="text-gray-700 mb-2">
               <span className="font-medium">Email:</span> ankushgupta1806@gmail.com
             </p>
@@ -220,9 +266,9 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className="border-t border-gray-200 mt-8 pt-8 text-center relative">
           <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-          <div className={`w-20 h-1 ${colors.bg} mx-auto mb-6`}></div>
+          <div className={`w-20 h-1 ${currentStyle.button} mx-auto mb-6`}></div>
           <p className="text-gray-700 font-medium">
-            &copy; {currentYear} <span className={colors.text}>Ankush Gupta</span>. All rights reserved.
+            &copy; {currentYear} <span className={currentStyle.text}>Ankush Gupta</span>. All rights reserved.
           </p>
         </div>
       </div>
