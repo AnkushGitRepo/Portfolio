@@ -8,7 +8,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const AboutSection = () => {
   const { currentColor } = useThemeColor();
-  const colors = getColorClasses(currentColor);
+  // We're using currentStyle instead of colors directly
+  const _colors = getColorClasses(currentColor);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
