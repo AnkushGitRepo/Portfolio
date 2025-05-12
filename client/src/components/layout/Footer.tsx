@@ -7,6 +7,7 @@ import { useThemeColor } from '@/components/theme-color-context';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   // We're using currentStyle directly instead of getting colors from the context
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { currentColor } = useThemeColor();
   const [currentIndex, setCurrentIndex] = useState(0);
 
