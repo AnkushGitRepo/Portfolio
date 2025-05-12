@@ -97,9 +97,20 @@ const AboutSection = () => {
   const currentStyle = styles[currentIndex];
 
   return (
-    <section className={`py-20 bg-gradient-to-br ${currentStyle.bg} transition-colors duration-500`} id="about">
+    <section className={`py-20 bg-gradient-to-br ${currentStyle.bg} transition-colors duration-500 relative overflow-hidden`} id="about">
+      {/* Decorative blurry spots */}
+      <div className="absolute top-20 left-20 w-64 h-64 rounded-full bg-white opacity-20 blur-3xl animate-blob"></div>
+      <div className="absolute bottom-40 right-20 w-72 h-72 rounded-full bg-white opacity-20 blur-3xl animate-blob animation-delay-2000"></div>
+      <div className="absolute top-1/2 left-1/3 w-56 h-56 rounded-full bg-white opacity-20 blur-3xl animate-blob animation-delay-4000"></div>
+      <div className="absolute bottom-20 left-1/4 w-48 h-48 rounded-full bg-white opacity-20 blur-3xl animate-blob animation-delay-3000"></div>
+      <div className="absolute top-40 right-1/4 w-60 h-60 rounded-full bg-white opacity-15 blur-3xl animate-blob animation-delay-1000"></div>
+      <div className="absolute bottom-1/3 left-10 w-52 h-52 rounded-full bg-white opacity-15 blur-3xl animate-blob animation-delay-5000"></div>
+      <div className="absolute top-10 right-10 w-40 h-40 rounded-full bg-white opacity-10 blur-3xl animate-blob animation-delay-6000"></div>
 
-      <div className="container mx-auto px-4">
+      {/* Subtle texture overlay */}
+      <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 transition-colors duration-300">
             About Me
@@ -108,7 +119,7 @@ const AboutSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className={`relative h-96 rounded-lg overflow-hidden shadow-xl ${currentStyle.photoBg} transition-colors duration-500`}>
+          <div className={`relative h-96 rounded-lg overflow-hidden shadow-xl ${currentStyle.photoBg} transition-colors duration-500 backdrop-blur-sm bg-opacity-80`}>
             {/* Image Slider */}
             <div className="relative w-full h-full">
               {images.map((image, index) => (
@@ -158,7 +169,7 @@ const AboutSection = () => {
             </div>
           </div>
 
-          <div>
+          <div className="relative z-10 p-6 rounded-lg bg-white/30 backdrop-blur-sm shadow-lg">
             <h3 className={`text-2xl font-bold ${currentStyle.headingText} mb-4 transition-colors duration-500`}>
               ML Engineer & Full Stack Developer
             </h3>
@@ -179,7 +190,7 @@ const AboutSection = () => {
             </p>
 
             <div className="mt-6">
-              <div className={`p-4 rounded-lg ${currentStyle.profileBg} transition-colors duration-500 max-w-md mx-auto`}>
+              <div className={`p-4 rounded-lg ${currentStyle.profileBg} transition-colors duration-500 max-w-md mx-auto backdrop-blur-sm bg-opacity-80 shadow-lg`}>
                 <h4 className={`text-lg font-semibold ${currentStyle.profileText} mb-3 transition-colors duration-500`}>
                   Education
                 </h4>
