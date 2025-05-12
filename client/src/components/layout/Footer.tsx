@@ -2,13 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useThemeColor, getColorClasses } from '@/components/theme-color-context';
+import { useThemeColor } from '@/components/theme-color-context';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  // We're using currentStyle directly instead of getting colors from the context
   const { currentColor } = useThemeColor();
-  // We're using currentStyle instead of colors directly
-  const _colors = getColorClasses(currentColor);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Define styles matching HeroSection.tsx
