@@ -70,7 +70,7 @@ const Footer = () => {
       </div>
 
       {/* Decorative accent - higher z-index */}
-      <div className={`absolute top-0 left-0 right-0 h-1 ${colors.bg} z-10`}></div>
+      <div className={`absolute top-0 left-0 right-0 h-1 ${currentStyle.button} z-10 transition-colors duration-500`}></div>
 
       {/* Additional decorative elements */}
       <div className={`absolute top-12 right-12 w-24 h-24 rounded-full ${currentStyle.button} opacity-5 blur-xl`}></div>
