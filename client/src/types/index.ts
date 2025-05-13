@@ -14,12 +14,10 @@ export interface Project {
 }
 
 export enum SkillCategory {
-  FRONTEND = 'Frontend',
-  BACKEND = 'Backend',
-  DATABASE = 'Database',
-  DEVOPS = 'DevOps',
-  TOOLS = 'Tools',
-  OTHER = 'Other',
+  LANGUAGES = 'Languages',
+  FRAMEWORKS = 'Frameworks & Libraries',
+  DATABASES = 'Databases',
+  TOOLS = 'Tools & IDEs',
 }
 
 export interface Skill {
@@ -27,7 +25,7 @@ export interface Skill {
   name: string;
   icon: string;
   category: SkillCategory;
-  proficiency: number;
+  proficiency?: number;
   order?: number;
   createdAt?: string;
   updatedAt?: string;

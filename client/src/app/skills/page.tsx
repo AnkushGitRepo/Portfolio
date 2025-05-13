@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import MainLayout from '@/components/layout/MainLayout';
 import SkillsSection from '@/components/sections/SkillsSection';
-import { generateMetadata } from '@/lib/seo';
+import { generateMetadata, generateStructuredData } from '@/lib/seo';
+import { ThemeColorProvider } from '@/components/theme-color-context';
 
 export const metadata: Metadata = generateMetadata({
   title: 'Skills | Ankush Gupta',
@@ -11,8 +12,21 @@ export const metadata: Metadata = generateMetadata({
 
 export default function SkillsPage() {
   return (
-    <MainLayout>
-      <SkillsSection />
-    </MainLayout>
+    <ThemeColorProvider>
+      <MainLayout>
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: generateStructuredData('WebSite', {
+              name: 'Skills | Ankush Gupta',
+              url: 'https://ankushgitrepo.github.io/Portfolio/skills',
+              description: 'Explore the technical skills and expertise of Ankush Gupta in machine learning, web development, and more.',
+            }),
+          }}
+        />
+        <SkillsSection />
+      </MainLayout>
+    </ThemeColorProvider>
   );
 }
