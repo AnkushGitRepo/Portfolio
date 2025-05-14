@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { getAssetPath } from '@/lib/utils';
 
 export default function NotFound() {
   const router = useRouter();
-  const basePath = process.env.NODE_ENV === 'production' ? '/Portfolio' : '';
 
   useEffect(() => {
     // Redirect to home page after 4 seconds
@@ -19,16 +20,15 @@ export default function NotFound() {
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden">
-      <img
-        src={`${basePath}/images/404_page.jpeg`}
-        alt="404 Page Not Found"
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center'
-        }}
-      />
+      <div className="relative w-full h-full">
+        <Image
+          src={getAssetPath('/images/404_page.jpeg')}
+          alt="404 Page Not Found"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+      </div>
     </div>
   );
 }
