@@ -1,6 +1,6 @@
-import { Project, Skill, ContactFormData } from '@/types';
+import { Project, Skill, ContactFormData, Book } from '@/types';
 import * as api from './api';
-import { projects, skills, submitMockContactForm } from './mockData';
+import { projects, skills, books, submitMockContactForm } from './mockData';
 import { fetchGitHubRepos, convertReposToProjects } from './github';
 
 // Check if we're running on GitHub Pages
@@ -253,6 +253,41 @@ export async function getSkillsByCategory(category: string): Promise<Skill[]> {
   } catch (error) {
     console.warn(`Failed to fetch ${category} skills from API, using mock data`, error);
     return skills.filter(skill => skill.category === category);
+  }
+}
+
+// Books API with fallback
+export async function getAllBooks(): Promise<Book[]> {
+  if (isGitHubPages) {
+    return books;
+  }
+
+  try {
+    return await api.getAllBooks();
+  } catch (error) {
+    console.warn('Failed to fetch books from API, using mock data', error);
+    return books;
+  }
+}
+
+export async function getBookById(id: string): Promise<Book> {
+  if (isGitHubPages) {
+    const book = books.find(b => b._id === id);
+    if (!book) {
+      throw new Error('Book not found');
+    }
+    return book;
+  }
+
+  try {
+    return await api.getBookById(id);
+  } catch (error) {
+    console.warn(`Failed to fetch book with ID ${id} from API, using mock data`, error);
+    const book = books.find(b => b._id === id);
+    if (!book) {
+      throw new Error('Book not found');
+    }
+    return book;
   }
 }
 

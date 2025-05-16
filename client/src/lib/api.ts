@@ -1,4 +1,4 @@
-import { Project, Skill, ContactFormData } from '@/types';
+import { Project, Skill, ContactFormData, Book } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -44,6 +44,23 @@ export async function getSkillsByCategory(category: string): Promise<Skill[]> {
   return response.json();
 }
 
+// Books API
+export async function getAllBooks(): Promise<Book[]> {
+  const response = await fetch(`${API_URL}/books`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch books');
+  }
+  return response.json();
+}
+
+export async function getBookById(id: string): Promise<Book> {
+  const response = await fetch(`${API_URL}/books/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch book');
+  }
+  return response.json();
+}
+
 // Contact API
 export async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; message: string }> {
   const response = await fetch(`${API_URL}/contact`, {
@@ -53,10 +70,10 @@ export async function submitContactForm(data: ContactFormData): Promise<{ succes
     },
     body: JSON.stringify(data),
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to submit contact form');
   }
-  
+
   return response.json();
 }

@@ -45,3 +45,22 @@ export interface ContactFormData {
   contactReason: ContactReason;
   message: string;
 }
+
+export interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  image: string;
+  coverImage?: string;
+  description: string;
+  review?: string;
+  rating?: number; // 1-5 scale
+  genre?: string[];
+  publishedYear?: number;
+  readDate?: string;
+  amazonLink?: string;
+  goodreadsLink?: string;
+  order?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
