@@ -10,7 +10,7 @@ node_modules
 /.next/
 /out/
 /client/.next/
-/client/out/
+# /client/out/
 
 # production
 /build
