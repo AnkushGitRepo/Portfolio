@@ -96,12 +96,12 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? `bg-gradient-to-r ${currentStyle.bg} backdrop-blur-md shadow-md` : 'bg-transparent'
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-gradient-to-r ${currentStyle.bg} ${
+        scrolled ? 'backdrop-blur-md shadow-md' : 'bg-opacity-80'
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className={`text-2xl font-bold ${scrolled ? currentStyle.profileText : 'text-white'}`}>
+        <Link href="/" className={`text-2xl font-bold ${currentStyle.profileText} transition-colors duration-300`}>
           Ankush Gupta
         </Link>
 
@@ -113,8 +113,8 @@ const Header = () => {
               href={link.href}
               className={`text-lg transition-colors duration-300 ${
                 pathname === link.href
-                  ? scrolled ? currentStyle.text : 'text-white font-medium'
-                  : scrolled ? `${currentStyle.profileText} hover:${currentStyle.text}` : 'text-white/80 hover:text-white'
+                  ? `${currentStyle.text} font-medium`
+                  : `${currentStyle.profileText} hover:${currentStyle.text}`
               }`}
             >
               {link.label}
@@ -124,13 +124,13 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden focus:outline-none ${scrolled ? currentStyle.profileText : 'text-white'}`}
+          className={`md:hidden focus:outline-none ${currentStyle.profileText} transition-colors duration-300`}
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`h-6 w-6 ${scrolled ? currentStyle.text : 'text-white'}`}
+            className={`h-6 w-6 ${currentStyle.text} transition-colors duration-300`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

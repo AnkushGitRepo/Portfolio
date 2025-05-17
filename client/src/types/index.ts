@@ -64,3 +64,18 @@ export interface Book {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface Certification {
+  _id: string;
+  title: string;
+  issuer: string;
+  description: string;
+  image: string;
+  issueDate: string;
+  expirationDate?: string;
+  credentialUrl?: string;
+  skills?: string[];
+  order?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}

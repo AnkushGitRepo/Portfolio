@@ -53,7 +53,7 @@ The project follows the MVC (Model-View-Controller) architecture:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/portfolio-website.git
+   git clone https://github.com/AnkushGitRepo/portfolio-website.git
    cd portfolio-website
    ```
 

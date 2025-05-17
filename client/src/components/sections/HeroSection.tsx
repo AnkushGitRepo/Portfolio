@@ -95,9 +95,9 @@ const HeroSection = () => {
                 Full Stack Developer & ML Engineer
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 text-center md:text-left">
-              <span>Hi, I&apos;m </span>
-              <span className={`${currentStyle.text} transition-all duration-1000 ease-in-out`}>{titles[currentIndex]}</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-center md:text-left">
+              <span className="text-gray-900">Hi, I&apos;m </span>
+              <span className={`${currentStyle.text} transition-colors duration-1000 ease-in-out`}>{titles[currentIndex]}</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 max-w-xl mx-auto md:mx-0 text-center md:text-left">
               I build exceptional intelligent systems that are fast, accessible, and visually appealing.
@@ -105,14 +105,14 @@ const HeroSection = () => {
             <div className="flex flex-wrap gap-4 mb-10 justify-center md:justify-start">
               <Link
                 href="/projects"
-                className={`px-6 py-3 ${currentStyle.button} text-white font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-110`}
+                className={`px-6 py-3 ${currentStyle.button} text-white font-medium rounded-lg transition-colors duration-1000 shadow-md hover:shadow-lg transform hover:scale-110`}
               >
                 View My Work
               </Link>
               <a
                 href={getAssetPath("/resume.pdf")}
                 download
-                className="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:scale-110"
+                className="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium rounded-lg transition-colors duration-1000 flex items-center shadow-md hover:shadow-lg transform hover:scale-110"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +138,7 @@ const HeroSection = () => {
                 href="https://github.com/AnkushGitRepo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:scale-110"
+                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-colors duration-1000 border border-gray-200 hover:border-gray-300 hover:scale-110"
                 aria-label="GitHub Profile"
               >
                 <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
@@ -149,7 +149,7 @@ const HeroSection = () => {
                 href="https://www.linkedin.com/in/ankushgupta18/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:scale-110"
+                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-colors duration-1000 border border-gray-200 hover:border-gray-300 hover:scale-110"
                 aria-label="LinkedIn Profile"
               >
                 <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
@@ -160,7 +160,7 @@ const HeroSection = () => {
                 href="https://www.instagram.com/_ankushg/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:scale-110"
+                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-colors duration-1000 border border-gray-200 hover:border-gray-300 hover:scale-110"
                 aria-label="Instagram Profile"
               >
                 <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
@@ -169,7 +169,7 @@ const HeroSection = () => {
               </a>
               <a
                 href="mailto:ankushgupta1806@gmail.com"
-                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:scale-110"
+                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-colors duration-1000 border border-gray-200 hover:border-gray-300 hover:scale-110"
                 aria-label="Email Contact"
               >
                 <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">

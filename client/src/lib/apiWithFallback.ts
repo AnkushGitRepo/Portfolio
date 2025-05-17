@@ -1,6 +1,6 @@
-import { Project, Skill, ContactFormData, Book } from '@/types';
+import { Project, Skill, ContactFormData, Book, Certification } from '@/types';
 import * as api from './api';
-import { projects, skills, books, submitMockContactForm } from './mockData';
+import { projects, skills, books, certifications, submitMockContactForm } from './mockData';
 import { fetchGitHubRepos, convertReposToProjects } from './github';
 
 // Check if we're running on GitHub Pages
@@ -288,6 +288,20 @@ export async function getBookById(id: string): Promise<Book> {
       throw new Error('Book not found');
     }
     return book;
+  }
+}
+
+// Certifications API with fallback
+export async function getAllCertifications(): Promise<Certification[]> {
+  if (isGitHubPages) {
+    return certifications;
+  }
+
+  try {
+    return await api.getAllCertifications();
+  } catch (error) {
+    console.warn('Failed to fetch certifications from API, using mock data', error);
+    return certifications;
   }
 }
 

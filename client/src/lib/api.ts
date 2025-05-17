@@ -1,4 +1,4 @@
-import { Project, Skill, ContactFormData, Book } from '@/types';
+import { Project, Skill, ContactFormData, Book, Certification } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -75,5 +75,14 @@ export async function submitContactForm(data: ContactFormData): Promise<{ succes
     throw new Error('Failed to submit contact form');
   }
 
+  return response.json();
+}
+
+// Certifications API
+export async function getAllCertifications(): Promise<Certification[]> {
+  const response = await fetch(`${API_URL}/certifications`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch certifications');
+  }
   return response.json();
 }
