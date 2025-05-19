@@ -428,6 +428,19 @@ export const books: Book[] = [
     order: 20,
     createdAt: new Date().toISOString(),
   },
+  {
+    _id: '21',
+    title: 'The 5 AM Club',
+    author: 'Robin Sharma',
+    image: getAssetPath('/images/Books/The_5_AM_Club.jpg'),
+    coverImage: getAssetPath('/images/Books/The_5_AM_Club.jpg'),
+    description: 'The 5 AM Club presents a revolutionary morning routine that helps you maximize productivity, improve health, and achieve success. Through the 20/20/20 formula, the book teaches how to use the first hour of your day to move (exercise), reflect (meditate/journal), and grow (learn). It emphasizes that world-class performance comes from owning your morning and establishing powerful daily habits.',
+    review: 'This book completely transformed my approach to mornings and productivity. Sharma\'s 20/20/20 formula provided me with a practical framework that boosted my energy, clarity, and focus throughout the day. The concept of using the "Victory Hour" to invest in my physical, mental, and spiritual growth has been game-changing. While the habit was difficult to establish initially, the benefits to my overall wellbeing and productivity have been absolutely worth the effort.',
+    genre: ['Self-Help', 'Personal Development', 'Productivity', 'Habits'],
+    goodreadsLink: 'https://www.goodreads.com/book/show/37502596-the-5-am-club',
+    order: 21,
+    createdAt: new Date().toISOString(),
+  },
 ];
 
 // Mock Certifications
