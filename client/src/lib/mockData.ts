@@ -402,6 +402,32 @@ export const books: Book[] = [
     order: 18,
     createdAt: new Date().toISOString(),
   },
+  {
+    _id: '19',
+    title: 'Think and Grow Rich',
+    author: 'Napoleon Hill',
+    image: getAssetPath('/images/Books/Think_and_Grow_Rich_by_Napoleon_hill.jpg'),
+    coverImage: getAssetPath('/images/Books/Think_and_Grow_Rich_by_Napoleon_hill.jpg'),
+    description: 'Think and Grow Rich is a guide to success by Napoleon Hill, which was first published in 1937 following the Great Depression. It was immediately welcomed as an antidote to hard times and remained a bestseller for decades.',
+    review: 'This timeless classic offers powerful insights into the psychology of success. Hill\'s principles of desire, faith, and persistence have been instrumental in shaping my mindset toward achievement. The concept of the "Master Mind" alliance particularly resonated with me, showing the importance of surrounding yourself with the right people.',
+    genre: ['Self-Help', 'Business', 'Personal Development', 'Finance'],
+    goodreadsLink: 'https://www.goodreads.com/book/show/30186948-think-and-grow-rich',
+    order: 19,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    _id: '20',
+    title: 'How to Win Friends and Influence People',
+    author: 'Dale Carnegie',
+    image: getAssetPath('/images/Books/how_to_win_friends_and_influence_people.jpg'),
+    coverImage: getAssetPath('/images/Books/how_to_win_friends_and_influence_people.jpg'),
+    description: 'Since its release in 1936, How to Win Friends and Influence People has sold more than 30 million copies. Dale Carnegie\'s first book is a timeless bestseller, packed with rock-solid advice that has carried thousands of now famous people up the ladder of success in their business and personal lives.',
+    review: 'Carnegie\'s principles on human relations have been invaluable in both my personal and professional life. The simple yet profound advice on how to genuinely connect with others, handle disagreements, and influence people positively has transformed my approach to communication and leadership.',
+    genre: ['Self-Help', 'Psychology', 'Business', 'Communication'],
+    goodreadsLink: 'https://www.goodreads.com/book/show/4865.How_to_Win_Friends_Influence_People',
+    order: 20,
+    createdAt: new Date().toISOString(),
+  },
 ];
 
 // Mock Certifications
