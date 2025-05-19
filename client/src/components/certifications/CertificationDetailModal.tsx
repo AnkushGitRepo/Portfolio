@@ -5,6 +5,7 @@ import { Certification } from '@/types';
 import { useThemeColor } from '@/components/theme-color-context';
 import { X, Award, ExternalLink } from 'lucide-react';
 import { getAssetPath } from '@/lib/utils';
+import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 
 interface CertificationDetailModalProps {
@@ -142,20 +143,20 @@ export default function CertificationDetailModal({
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-10 h-10 border-3 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
             </div>
-            <img
+            <Image
               src={getAssetPath(certification.image)}
               alt={certification.title}
-              className="absolute inset-0 w-full h-full object-contain p-2 transition-opacity duration-500"
+              fill
+              className="absolute inset-0 object-contain p-2 transition-opacity duration-500"
               onLoad={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.opacity = '1';
                 console.log(`Modal image loaded: ${certification.title}`);
               }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
+              onError={() => {
                 console.log(`Modal image error: ${certification.title}`);
-                target.onerror = null; // Prevent infinite loop
-                target.src = getAssetPath('/placeholder.svg');
+                // Handle error by showing placeholder
+                // Next/image handles errors differently, so we'll use onError for logging only
               }}
               style={{ opacity: 0 }} // Start with opacity 0
             />

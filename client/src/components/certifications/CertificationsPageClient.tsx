@@ -6,6 +6,7 @@ import { useThemeColor } from '@/components/theme-color-context';
 import CertificationDetailModal from './CertificationDetailModal';
 import { Calendar, ExternalLink, X, Filter } from 'lucide-react';
 import { getAssetPath } from '@/lib/utils';
+import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -291,21 +292,19 @@ export default function CertificationsPageClient({ certifications }: Certificati
               <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
                 <div className="w-8 h-8 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
               </div>
-              <img
+              <Image
                 src={getAssetPath(certification.image)}
                 alt={`${certification.title} Certificate`}
-                className="absolute inset-0 w-full h-full object-contain p-2 transition-opacity duration-300"
-                loading="lazy"
+                fill
+                className="absolute inset-0 object-contain p-2 transition-opacity duration-300"
                 onLoad={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.style.opacity = '1';
                   console.log(`Image loaded: ${certification.title}`);
                 }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
+                onError={() => {
                   console.log(`Image error: ${certification.title}`);
-                  target.onerror = null; // Prevent infinite loop
-                  target.src = getAssetPath('/placeholder.svg');
+                  // Next/image handles errors differently
                 }}
                 style={{ opacity: 0 }} // Start with opacity 0
               />
