@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { submitContactForm } from "@/lib/apiWithFallback";
 import { ContactFormData, ContactReason } from "@/types";
 import { useThemeColor } from "@/components/theme-color-context";
@@ -8,6 +8,7 @@ import { Github, Linkedin, Instagram, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
 const ContactSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const { currentColor } = useThemeColor();
 
   const [formData, setFormData] = useState<ContactFormData>({
@@ -71,6 +72,8 @@ const ContactSection = () => {
       leftBg: "bg-blue-100",
       text: "text-blue-600",
       button: "bg-blue-600 hover:bg-blue-700",
+      border: "border-blue-200",
+      hoverText: "hover:text-blue-600",
     },
     {
       bg: "from-green-50 to-green-100",
@@ -78,6 +81,8 @@ const ContactSection = () => {
       leftBg: "bg-green-100",
       text: "text-green-600",
       button: "bg-green-600 hover:bg-green-700",
+      border: "border-green-200",
+      hoverText: "hover:text-green-600",
     },
     {
       bg: "from-purple-50 to-purple-100",
@@ -85,6 +90,8 @@ const ContactSection = () => {
       leftBg: "bg-purple-100",
       text: "text-purple-600",
       button: "bg-purple-600 hover:bg-purple-700",
+      border: "border-purple-200",
+      hoverText: "hover:text-purple-600",
     },
     {
       bg: "from-orange-50 to-orange-100",
@@ -92,35 +99,45 @@ const ContactSection = () => {
       leftBg: "bg-orange-100",
       text: "text-orange-600",
       button: "bg-orange-600 hover:bg-orange-700",
+      border: "border-orange-200",
+      hoverText: "hover:text-orange-600",
     },
   ];
-  const colorMap = ["blue", "green", "purple", "orange"];
-  const styleIndex = colorMap.indexOf(currentColor);
-  const currentStyle = styles[styleIndex === -1 ? 0 : styleIndex];
+
+  // Set up color cycling
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % styles.length);
+    }, 3000); // Change color every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [styles.length]);
+
+  // Get current style
+  const currentStyle = styles[currentIndex];
 
   return (
     <section
       id="contact"
-      className={`min-h-screen w-full flex items-stretch justify-stretch ${currentStyle.solidBg} p-0 m-0 transition-colors duration-500`}
+      className={`min-h-screen w-full flex items-center justify-center ${currentStyle.solidBg} py-8 px-2 sm:px-4 transition-colors duration-500`}
     >
-      <div className="flex flex-row w-full h-full p-0 m-0">
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl min-h-[70vh] bg-white/70 rounded-2xl shadow-xl overflow-hidden border border-gray-100">
         {/* Left: Info */}
         <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className={`w-[30vw] min-w-[300px] max-w-[500px] flex flex-col justify-center items-start px-8 py-0 border-r border-gray-200 h-full m-0 ${currentStyle.leftBg} transition-colors duration-500`}
-          style={{ minHeight: "100vh" }}
+          className={`w-full lg:w-1/2 flex flex-col justify-center items-start px-6 sm:px-10 py-10 lg:py-16 border-b lg:border-b-0 lg:border-r ${currentStyle.border} ${currentStyle.leftBg} transition-colors duration-500`}
         >
           <h2
-            className={`font-extrabold leading-tight mb-6 text-left ${currentStyle.text}`}
-            style={{ fontSize: "clamp(2.5rem,5vw,4.5rem)" }}
+            className={`font-extrabold leading-tight mb-6 text-left ${currentStyle.text} relative`}
+            style={{ fontSize: "clamp(2rem,6vw,3.5rem)" }}
           >
-            REACH OUT
-            <br />
-            TO ME
+            <span className="block mb-2">Let&apos;s Create</span>
+            <span className="block">Something Amazing</span>
+            <span className="absolute -bottom-4 left-0 w-24 h-1 bg-gradient-to-r from-current to-transparent opacity-50"></span>
           </h2>
-          <p className={`text-base mb-2 text-gray-900`}>
+          <p className={`text-base mb-2 text-gray-900 mt-8 max-w-xs`}>
             Contact me at{" "}
             <a
               href="mailto:ankushgupta1806@gmail.com"
@@ -130,9 +147,9 @@ const ContactSection = () => {
             </a>
           </p>
           <div
-            className="mb-2"
+            className="mb-2 mt-8"
             style={{
-              fontSize: "2.5rem",
+              fontSize: "2rem",
               fontWeight: 700,
               color: "#bdbdbd",
               lineHeight: 1,
@@ -140,7 +157,7 @@ const ContactSection = () => {
           >
             OR
           </div>
-          <p className={`text-base mb-8 text-gray-900`}>
+          <p className={`text-base mb-8 text-gray-900 max-w-xs`}>
             Fill in the form and I will reach out to you shortly.
           </p>
           <div className="flex space-x-4 mt-4">
@@ -152,7 +169,7 @@ const ContactSection = () => {
               className={`${currentStyle.text} transition-colors`}
               aria-label="GitHub"
             >
-              <Github className="h-7 w-7" />
+              <Github className="h-6 w-6 lg:h-7 lg:w-7" />
             </motion.a>
             <motion.a
               href="https://linkedin.com/in/ankushgupta18"
@@ -162,7 +179,7 @@ const ContactSection = () => {
               className={`${currentStyle.text} transition-colors`}
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-7 w-7" />
+              <Linkedin className="h-6 w-6 lg:h-7 lg:w-7" />
             </motion.a>
             <motion.a
               href="https://instagram.com/_ankushg"
@@ -172,7 +189,7 @@ const ContactSection = () => {
               className={`${currentStyle.text} transition-colors`}
               aria-label="Instagram"
             >
-              <Instagram className="h-7 w-7" />
+              <Instagram className="h-6 w-6 lg:h-7 lg:w-7" />
             </motion.a>
           </div>
         </motion.div>
@@ -181,12 +198,11 @@ const ContactSection = () => {
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className={`w-[70vw] flex flex-col justify-center items-center px-0 py-0 bg-white h-full m-0 transition-colors duration-500`}
-          style={{ minHeight: "100vh" }}
+          className={`w-full lg:w-1/2 flex flex-col justify-center items-center px-6 sm:px-10 py-10 lg:py-16 bg-white h-auto m-0 transition-colors duration-500`}
         >
           <form
             onSubmit={handleSubmit}
-            className="w-full max-w-xl mx-auto space-y-6 p-12"
+            className="w-full max-w-md mx-auto space-y-6"
           >
             <div>
               <label
@@ -202,7 +218,7 @@ const ContactSection = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-current focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                className={`w-full px-4 py-3 border ${currentStyle.border} rounded-lg focus:ring-2 focus:ring-${currentColor}-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300`}
                 placeholder="Enter Name"
               />
             </div>
@@ -220,7 +236,7 @@ const ContactSection = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-current focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                className={`w-full px-4 py-3 border ${currentStyle.border} rounded-lg focus:ring-2 focus:ring-${currentColor}-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300`}
                 placeholder="Enter Email"
               />
             </div>
@@ -237,7 +253,7 @@ const ContactSection = () => {
                 value={formData.contactReason}
                 onChange={handleReasonChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-current focus:border-transparent bg-white text-gray-900 transition-all duration-300 appearance-none pr-10"
+                className={`w-full px-4 py-3 border ${currentStyle.border} rounded-lg focus:ring-2 focus:ring-${currentColor}-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300 appearance-none pr-10`}
                 style={{
                   WebkitAppearance: "none",
                   MozAppearance: "none",
@@ -251,7 +267,7 @@ const ContactSection = () => {
                 ))}
               </select>
               <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 flex items-center h-full">
-                <ChevronDown className="text-gray-400 w-5 h-5" />
+                <ChevronDown className={`${currentStyle.text} w-5 h-5`} />
               </div>
             </div>
             <div>
@@ -268,7 +284,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-current focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                className={`w-full px-4 py-3 border ${currentStyle.border} rounded-lg focus:ring-2 focus:ring-${currentColor}-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300`}
                 placeholder="Type your message here."
               ></textarea>
             </div>
@@ -280,7 +296,22 @@ const ContactSection = () => {
                     : "bg-red-100 text-red-800"
                 } transition-all duration-300 animate-fadeIn`}
               >
-                {submitStatus.message}
+                {submitStatus.success ? (
+                  <>
+                    <div className="font-semibold text-lg mb-1">
+                      Thank you for reaching out!
+                    </div>
+                    <div>
+                      Your message has been received. I will get back to you as
+                      soon as possible.
+                    </div>
+                    <div className="mt-2 text-sm text-green-700">
+                      A confirmation email has been sent to your inbox.
+                    </div>
+                  </>
+                ) : (
+                  submitStatus.message
+                )}
               </div>
             )}
             <button

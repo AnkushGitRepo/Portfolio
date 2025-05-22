@@ -16,5 +16,8 @@
   "private": true,
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "framer-motion": "^12.12.1"
   }
 }
