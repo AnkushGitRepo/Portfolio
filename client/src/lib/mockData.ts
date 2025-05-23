@@ -1,14 +1,47 @@
-import {
-  Project,
-  Skill,
-  SkillCategory,
-  Book,
-  Certification,
-} from "@/types";
+import { Project, Skill, SkillCategory, Book, Certification } from "@/types";
 import { getAssetPath } from "./utils";
 
 // Mock Projects
 export const projects: Project[] = [
+  {
+    _id: "1",
+    title: "Portfolio Website",
+    description:
+      "A modern portfolio website built with Next.js and Express. This project showcases my skills in full-stack development, responsive design, and modern web technologies.\n\nThe website features a clean, minimalist design with animated backgrounds and color themes that change dynamically. It includes sections for projects, skills, and contact information.",
+    image: `${getAssetPath("/images/projects/Portfolio_1.png")}, ${getAssetPath(
+      "/images/projects/Portfolio_2.png"
+    )}, ${getAssetPath("/images/projects/Portfolio_3.png")}`,
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Express",
+      "MongoDB",
+      "Tailwind CSS",
+    ],
+    githubUrl: "https://github.com/AnkushGitRepo/Portfolio",
+    liveUrl: "https://ankushgitrepo.github.io/Portfolio/",
+    featured: true,
+    category: "Web Development",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    _id: "2",
+    title: "DataHarbor",
+    description:
+      "A comprehensive data management and analytics platform. DataHarbor provides tools for data collection, processing, and visualization.\n\nBuilt with modern technologies, this project demonstrates advanced data handling capabilities and user-friendly interfaces.",
+    image: `${getAssetPath(
+      "/images/projects/Dataharbor_1.png"
+    )}, ${getAssetPath("/images/projects/Dataharbor_2.png")}, ${getAssetPath(
+      "/images/projects/Dataharbor_3.png"
+    )}`,
+    technologies: ["Python", "Data Science", "Analytics", "Machine Learning"],
+    githubUrl: "https://github.com/AnkushGitRepo/DataHarbor",
+    liveUrl: "",
+    featured: true,
+    category: "Data Science",
+    createdAt: new Date().toISOString(),
+  },
   {
     _id: "4",
     title: "Pharmacy Management System",
