@@ -7,6 +7,7 @@ import { useThemeColor } from '@/components/theme-color-context';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { X, Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getAssetPath } from '@/lib/utils';
 
 interface ProjectDetailModalProps {
   project: Project;
@@ -68,7 +69,7 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
   const currentStyle = styles[currentIndex];
 
   // For handling multiple images (assuming project.image could be a comma-separated string)
-  const images = project.image ? project.image.split(',').map(img => img.trim()) : ['/images/projects/github-repo.jpg'];
+  const images = project.image ? project.image.split(',').map(img => img.trim()) : [getAssetPath('/images/projects/github-repo.jpg')];
 
   // Handle keyboard events (Escape to close, arrows for navigation)
   useEffect(() => {
@@ -118,7 +119,7 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
           <div className="relative mb-6 rounded-lg overflow-hidden bg-gray-100 h-64 md:h-96">
             <div className="absolute inset-0 flex items-center justify-center">
               <Image
-                src={images.length > 0 ? images[currentImageIndex] : '/images/projects/github-repo.jpg'}
+                src={images.length > 0 ? images[currentImageIndex] : getAssetPath('/images/projects/github-repo.jpg')}
                 alt={`${project.title} screenshot ${currentImageIndex + 1}`}
                 fill
                 className="object-contain p-2"
@@ -126,7 +127,7 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
                   // If image fails to load, replace with a fallback
                   const target = e.target as HTMLImageElement;
                   target.onerror = null; // Prevent infinite loop
-                  target.src = '/images/projects/github-repo.jpg';
+                  target.src = getAssetPath('/images/projects/github-repo.jpg');
                 }}
               />
             </div>

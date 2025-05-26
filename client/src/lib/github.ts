@@ -157,7 +157,7 @@ export function convertReposToProjects(repos: GitHubRepo[]): Project[] {
     }
 
     // Special handling for Resume Builder repository
-    if (repo.name === "Resume Builder") {
+    if (repo.name === "Resume-Builder") {
       return {
         _id: repo.id.toString(),
         title: "Resume Builder",
@@ -187,7 +187,7 @@ export function convertReposToProjects(repos: GitHubRepo[]): Project[] {
     }
 
     // Special handling for Periodic Table repository
-    if (repo.name === "Periodic Table") {
+    if (repo.name === "Periodic-Table") {
       return {
         _id: repo.id.toString(),
         title: "Periodic Table",

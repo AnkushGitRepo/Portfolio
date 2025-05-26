@@ -7,6 +7,7 @@ import ProjectDetailModal from './ProjectDetailModal';
 import ProjectFilters from './ProjectFilters';
 import { ArrowRight, Github, ExternalLink, Filter } from 'lucide-react';
 import Image from 'next/image';
+import { getAssetPath } from '@/lib/utils';
 
 interface ProjectsPageClientProps {
   projects: Project[];
@@ -144,7 +145,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                 >
                   <div className={`relative h-48 ${currentStyle.light} flex items-center justify-center overflow-hidden transition-colors duration-500`}>
                     <Image
-                      src={project.image ? project.image.split(',')[0].trim() : '/images/projects/github-repo.jpg'}
+                      src={project.image ? project.image.split(',')[0].trim() : getAssetPath('/images/projects/github-repo.jpg')}
                       alt={project.title}
                       fill
                       className="object-cover hover:scale-105 transition-transform duration-500"
@@ -152,7 +153,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                         // If image fails to load, replace with a fallback
                         const target = e.target as HTMLImageElement;
                         target.onerror = null; // Prevent infinite loop
-                        target.src = '/images/projects/github-repo.jpg';
+                        target.src = getAssetPath('/images/projects/github-repo.jpg');
                       }}
                     />
 

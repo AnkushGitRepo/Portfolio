@@ -9,6 +9,7 @@ import { useThemeColor, ColorType } from "@/components/theme-color-context";
 import ProjectDetailModal from "@/components/projects/ProjectDetailModal";
 import ProjectFilters from "@/components/projects/ProjectFilters";
 import { ArrowRight, Github, ExternalLink, Filter } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 const ProjectsSection = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -180,7 +181,7 @@ const ProjectsSection = () => {
                       src={
                         project.image
                           ? project.image.split(",")[0].trim()
-                          : "/images/projects/github-repo.jpg"
+                          : getAssetPath("/images/projects/github-repo.jpg")
                       }
                       alt={project.title}
                       fill
@@ -189,7 +190,7 @@ const ProjectsSection = () => {
                         // If image fails to load, replace with a fallback
                         const target = e.target as HTMLImageElement;
                         target.onerror = null; // Prevent infinite loop
-                        target.src = "/images/projects/github-repo.jpg";
+                        target.src = getAssetPath("/images/projects/github-repo.jpg");
                       }}
                     />
 

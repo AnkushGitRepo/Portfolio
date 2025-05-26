@@ -93,7 +93,23 @@ export async function getAllProjects(): Promise<Project[]> {
         ...otherRepos,
       ]);
 
-      return [...repoProjects, ...projects];
+      // Combine with mock projects, avoiding duplicates
+      const combinedProjects = [...repoProjects];
+
+      // Add mock projects that don't have the same name as any GitHub repo
+      projects.forEach((mockProject) => {
+        if (
+          !repoProjects.some(
+            (repoProject) =>
+              repoProject.title.toLowerCase() ===
+              mockProject.title.toLowerCase()
+          )
+        ) {
+          combinedProjects.push(mockProject);
+        }
+      });
+
+      return combinedProjects;
     } catch (githubError) {
       console.warn(
         "Failed to fetch GitHub repos, using mock data only",
@@ -195,8 +211,24 @@ export async function getFeaturedProjects(): Promise<Project[]> {
         (project) => project.featured
       );
 
-      // Combine and limit to 6 projects
-      return [...repoProjects, ...featuredMockProjects].slice(0, 6);
+      // Combine, prioritizing GitHub repos and avoiding duplicates
+      const combinedProjects = [...repoProjects];
+
+      // Add featured mock projects that don't have the same name as any GitHub repo
+      featuredMockProjects.forEach((mockProject) => {
+        if (
+          !repoProjects.some(
+            (repoProject) =>
+              repoProject.title.toLowerCase() ===
+              mockProject.title.toLowerCase()
+          )
+        ) {
+          combinedProjects.push(mockProject);
+        }
+      });
+
+      // Return only the top 6 projects
+      return combinedProjects.slice(0, 6);
     } catch (githubError) {
       console.warn(
         "Failed to fetch GitHub repos, using mock data only",
