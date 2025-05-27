@@ -30,10 +30,22 @@ export const submitContactForm = async (
     const savedContact = await contact.save();
 
     // Send confirmation email to the user
-    await sendContactConfirmation(email, name);
+    try {
+      await sendContactConfirmation(email, name);
+      console.log("Confirmation email sent successfully to:", email);
+    } catch (emailError) {
+      console.error("Failed to send confirmation email:", emailError);
+      // Don't fail the entire request if email fails
+    }
 
     // Send notification email to admin
-    await sendContactNotification(savedContact);
+    try {
+      await sendContactNotification(savedContact);
+      console.log("Notification email sent successfully to admin");
+    } catch (emailError) {
+      console.error("Failed to send notification email:", emailError);
+      // Don't fail the entire request if email fails
+    }
 
     res.status(201).json({
       success: true,
