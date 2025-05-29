@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button"
 import { useThemeColor, getColorClasses } from '@/components/theme-color-context'
 import SpotifyLogo from '@/components/spotify-logo'
 import { getAssetPath } from '@/lib/utils'
-import { getFeaturedProjects } from '@/lib/apiWithFallback'
 import { Project } from '@/types'
 import {
   BookOpen,
@@ -19,28 +18,16 @@ import {
   ArrowRight
 } from 'lucide-react'
 
-export default function InfoCards() {
+interface InfoCardsProps {
+  projects: Project[]
+}
+
+export default function InfoCards({ projects }: InfoCardsProps) {
   const { currentColor } = useThemeColor()
   const colors = getColorClasses(currentColor)
-  const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const featuredProjects = await getFeaturedProjects()
-        setProjects(featuredProjects.slice(0, 3)) // Show only first 3 projects
-      } catch (error) {
-        console.error('Error fetching projects:', error)
-        // Fallback to empty array if fetch fails
-        setProjects([])
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchProjects()
-  }, [])
+  // Show only first 3 projects
+  const displayProjects = projects.slice(0, 3)
 
   const skills = [
     {
@@ -183,25 +170,8 @@ export default function InfoCards() {
             </CardHeader>
             <CardContent className="pt-4 flex-grow overflow-y-auto custom-scrollbar">
               <div className="space-y-4">
-                {loading ? (
-                  // Loading skeleton
-                  Array.from({ length: 3 }).map((_, index) => (
-                    <div key={index} className="border-b border-slate-100 dark:border-slate-700 pb-4 last:border-0 last:pb-0">
-                      <div className="flex items-start gap-3 flex-wrap sm:flex-nowrap">
-                        <div className="w-16 h-16 bg-slate-200 rounded-md animate-pulse mx-auto sm:mx-0 mb-2 sm:mb-0"></div>
-                        <div className="flex-1">
-                          <div className="h-4 bg-slate-200 rounded animate-pulse mb-2"></div>
-                          <div className="h-3 bg-slate-200 rounded animate-pulse mb-2"></div>
-                          <div className="flex gap-1.5">
-                            <div className="h-5 w-12 bg-slate-200 rounded animate-pulse"></div>
-                            <div className="h-5 w-16 bg-slate-200 rounded animate-pulse"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : projects.length > 0 ? (
-                  projects.map((project) => (
+                {displayProjects.length > 0 ? (
+                  displayProjects.map((project) => (
                     <div key={project._id} className="border-b border-slate-100 dark:border-slate-700 pb-4 last:border-0 last:pb-0">
                       <div className="flex items-start gap-3 flex-wrap sm:flex-nowrap">
                         <Link href={`/projects#${project._id}`} className="block relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden group mx-auto sm:mx-0 mb-2 sm:mb-0">

@@ -6,6 +6,7 @@ import ScrollingSkills from '@/components/sections/ScrollingSkills';
 import HomeContactSection from '@/components/sections/HomeContactSection';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { ThemeColorProvider } from '@/components/theme-color-context';
+import { getFeaturedProjects } from '@/lib/apiWithFallback';
 
 export const metadata: Metadata = generateMetadata({
   title: 'Ankush Gupta | ML Engineer & Full Stack Developer',
@@ -13,7 +14,10 @@ export const metadata: Metadata = generateMetadata({
   keywords: ['ML Engineer', 'Full Stack Developer', 'React', 'Next.js', 'Node.js', 'MongoDB', 'Express'],
 });
 
-export default function Home() {
+export default async function Home() {
+  // Fetch projects server-side
+  const projects = await getFeaturedProjects();
+
   return (
     <ThemeColorProvider>
       <MainLayout>
@@ -37,7 +41,7 @@ export default function Home() {
         />
 
         <HeroSection />
-        <InfoCards />
+        <InfoCards projects={projects} />
         <ScrollingSkills />
         <HomeContactSection />
       </MainLayout>
