@@ -76,16 +76,23 @@ export async function getAllProjects(): Promise<Project[]> {
       // Find special repositories
       const portfolioRepo = repos.find((repo) => repo.name === "Portfolio");
       const dataHarborRepo = repos.find((repo) => repo.name === "DataHarbor");
+      const resumeBuilderRepo = repos.find((repo) => repo.name === "Resume-Builder");
+      const periodicTableRepo = repos.find((repo) => repo.name === "Periodic-Table");
 
       // Get other repos excluding special ones
       const otherRepos = repos.filter(
-        (repo) => repo.name !== "Portfolio" && repo.name !== "DataHarbor"
+        (repo) => repo.name !== "Portfolio" &&
+                  repo.name !== "DataHarbor" &&
+                  repo.name !== "Resume-Builder" &&
+                  repo.name !== "Periodic-Table"
       );
 
       // Create prioritized repo list
       const prioritizedRepos = [];
       if (portfolioRepo) prioritizedRepos.push(portfolioRepo);
       if (dataHarborRepo) prioritizedRepos.push(dataHarborRepo);
+      if (resumeBuilderRepo) prioritizedRepos.push(resumeBuilderRepo);
+      if (periodicTableRepo) prioritizedRepos.push(periodicTableRepo);
 
       // Convert repos to projects, prioritizing special repos
       const repoProjects = convertReposToProjects([
@@ -129,16 +136,23 @@ export async function getFeaturedProjects(): Promise<Project[]> {
       // Find special repositories
       const portfolioRepo = repos.find((repo) => repo.name === "Portfolio");
       const dataHarborRepo = repos.find((repo) => repo.name === "DataHarbor");
+      const resumeBuilderRepo = repos.find((repo) => repo.name === "Resume-Builder");
+      const periodicTableRepo = repos.find((repo) => repo.name === "Periodic-Table");
 
       // Get other repos excluding special ones
       const otherRepos = repos.filter(
-        (repo) => repo.name !== "Portfolio" && repo.name !== "DataHarbor"
+        (repo) => repo.name !== "Portfolio" &&
+                  repo.name !== "DataHarbor" &&
+                  repo.name !== "Resume-Builder" &&
+                  repo.name !== "Periodic-Table"
       );
 
       // Create prioritized repo list
       const prioritizedRepos = [];
       if (portfolioRepo) prioritizedRepos.push(portfolioRepo);
       if (dataHarborRepo) prioritizedRepos.push(dataHarborRepo);
+      if (resumeBuilderRepo) prioritizedRepos.push(resumeBuilderRepo);
+      if (periodicTableRepo) prioritizedRepos.push(periodicTableRepo);
 
       // Convert repos to projects, prioritizing special repos
       const repoProjects = convertReposToProjects([
@@ -190,16 +204,23 @@ export async function getFeaturedProjects(): Promise<Project[]> {
       // Find special repositories
       const portfolioRepo = repos.find((repo) => repo.name === "Portfolio");
       const dataHarborRepo = repos.find((repo) => repo.name === "DataHarbor");
+      const resumeBuilderRepo = repos.find((repo) => repo.name === "Resume-Builder");
+      const periodicTableRepo = repos.find((repo) => repo.name === "Periodic-Table");
 
       // Get other repos excluding special ones
       const otherRepos = repos.filter(
-        (repo) => repo.name !== "Portfolio" && repo.name !== "DataHarbor"
+        (repo) => repo.name !== "Portfolio" &&
+                  repo.name !== "DataHarbor" &&
+                  repo.name !== "Resume-Builder" &&
+                  repo.name !== "Periodic-Table"
       );
 
       // Create prioritized repo list
       const prioritizedRepos = [];
       if (portfolioRepo) prioritizedRepos.push(portfolioRepo);
       if (dataHarborRepo) prioritizedRepos.push(dataHarborRepo);
+      if (resumeBuilderRepo) prioritizedRepos.push(resumeBuilderRepo);
+      if (periodicTableRepo) prioritizedRepos.push(periodicTableRepo);
 
       // Convert repos to projects, prioritizing special repos
       const repoProjects = convertReposToProjects([
