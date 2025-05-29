@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import { useThemeColor, getColorClasses } from '@/components/theme-color-context'
 import SpotifyLogo from '@/components/spotify-logo'
 import { getAssetPath } from '@/lib/utils'
+import { getFeaturedProjects } from '@/lib/apiWithFallback'
+import { Project } from '@/types'
 import {
   BookOpen,
   MapPin,
@@ -20,36 +22,25 @@ import {
 export default function InfoCards() {
   const { currentColor } = useThemeColor()
   const colors = getColorClasses(currentColor)
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const myProjects = [
-    {
-      id: 1,
-      title: "Pharmacy Management System",
-      description: "A console-based system using Java and PostgreSQL for managing drug inventory and transactions.",
-      image: getAssetPath("/images/projects/pharmacy-system.jpg"),
-      link: "/projects/pharmacy-management-system",
-      githubUrl: "https://github.com/AnkushGitRepo/Pharmacy-Management-System",
-      tags: ["Java", "PostgreSQL", "Console App"]
-    },
-    {
-      id: 2,
-      title: "Currency Converter",
-      description: "Java console application allowing users to view, convert, and update exchange rates.",
-      image: getAssetPath("/images/projects/currency-converter.jpg"),
-      link: "/projects/currency-converter",
-      githubUrl: "https://github.com/AnkushGitRepo/Currency_Converter_Using_Core_Java",
-      tags: ["Java", "Console App"]
-    },
-    {
-      id: 3,
-      title: "Cashflow Compass",
-      description: "Python-based CLI Expense Tracker for managing and analyzing expenses.",
-      image: getAssetPath("/images/projects/cashflow-compass.jpg"),
-      link: "/projects/cashflow-compass",
-      githubUrl: "https://github.com/AnkushGitRepo/Cashflow-Compass",
-      tags: ["Python", "CLI", "Finance"]
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const featuredProjects = await getFeaturedProjects()
+        setProjects(featuredProjects.slice(0, 3)) // Show only first 3 projects
+      } catch (error) {
+        console.error('Error fetching projects:', error)
+        // Fallback to empty array if fetch fails
+        setProjects([])
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    fetchProjects()
+  }, [])
 
   const skills = [
     {
@@ -192,34 +183,69 @@ export default function InfoCards() {
             </CardHeader>
             <CardContent className="pt-4 flex-grow overflow-y-auto custom-scrollbar">
               <div className="space-y-4">
-                {myProjects.map((project) => (
-                  <div key={project.id} className="border-b border-slate-100 dark:border-slate-700 pb-4 last:border-0 last:pb-0">
-                    <div className="flex items-start gap-3 flex-wrap sm:flex-nowrap">
-                      <Link href={project.link} className="block relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden group mx-auto sm:mx-0 mb-2 sm:mb-0">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          width={64}
-                          height={64}
-                          className="object-cover transition-transform group-hover:scale-105"
-                        />
-                      </Link>
-                      <div className="flex-1">
-                        <Link href={project.link} className="group">
-                          <h3 className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors">{project.title}</h3>
-                        </Link>
-                        <p className="text-sm text-slate-500 mt-1">{project.description}</p>
-                        <div className="flex flex-wrap gap-1.5 mt-2">
-                          {project.tags.map((tag, i) => (
-                            <Badge key={i} variant="outline" className={`bg-${currentColor}-100 text-${currentColor}-700 border-${currentColor}-200 font-medium shadow-sm`}>
-                              {tag}
-                            </Badge>
-                          ))}
+                {loading ? (
+                  // Loading skeleton
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <div key={index} className="border-b border-slate-100 dark:border-slate-700 pb-4 last:border-0 last:pb-0">
+                      <div className="flex items-start gap-3 flex-wrap sm:flex-nowrap">
+                        <div className="w-16 h-16 bg-slate-200 rounded-md animate-pulse mx-auto sm:mx-0 mb-2 sm:mb-0"></div>
+                        <div className="flex-1">
+                          <div className="h-4 bg-slate-200 rounded animate-pulse mb-2"></div>
+                          <div className="h-3 bg-slate-200 rounded animate-pulse mb-2"></div>
+                          <div className="flex gap-1.5">
+                            <div className="h-5 w-12 bg-slate-200 rounded animate-pulse"></div>
+                            <div className="h-5 w-16 bg-slate-200 rounded animate-pulse"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
+                  ))
+                ) : projects.length > 0 ? (
+                  projects.map((project) => (
+                    <div key={project._id} className="border-b border-slate-100 dark:border-slate-700 pb-4 last:border-0 last:pb-0">
+                      <div className="flex items-start gap-3 flex-wrap sm:flex-nowrap">
+                        <Link href={`/projects#${project._id}`} className="block relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden group mx-auto sm:mx-0 mb-2 sm:mb-0">
+                          <Image
+                            src={project.image ? project.image.split(',')[0].trim() : getAssetPath('/images/projects/github-repo.jpg')}
+                            alt={project.title}
+                            width={64}
+                            height={64}
+                            className="object-cover transition-transform group-hover:scale-105"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.onerror = null;
+                              target.src = getAssetPath('/images/projects/github-repo.jpg');
+                            }}
+                          />
+                        </Link>
+                        <div className="flex-1">
+                          <Link href={`/projects#${project._id}`} className="group">
+                            <h3 className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors">{project.title}</h3>
+                          </Link>
+                          <p className="text-sm text-slate-500 mt-1 line-clamp-2">{project.description}</p>
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {project.technologies.slice(0, 3).map((tech, i) => (
+                              <Badge key={i} variant="outline" className={`bg-${currentColor}-100 text-${currentColor}-700 border-${currentColor}-200 font-medium shadow-sm`}>
+                                {tech}
+                              </Badge>
+                            ))}
+                            {project.technologies.length > 3 && (
+                              <Badge variant="outline" className="text-slate-500 border-slate-300">
+                                +{project.technologies.length - 3}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  // Empty state
+                  <div className="text-center py-8">
+                    <Code className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                    <p className="text-slate-500">No projects available</p>
                   </div>
-                ))}
+                )}
               </div>
             </CardContent>
             <CardFooter>
