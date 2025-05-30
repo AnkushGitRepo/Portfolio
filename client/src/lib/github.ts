@@ -54,13 +54,16 @@ export async function fetchGitHubRepos(
       repos = repos.filter((repo) => !repo.fork);
     }
 
-    // Filter out specific repositories
+    // Filter out specific repositories as per user requirements
     const excludedRepos = [
-      "MERN-Sandbox",
-      "MERN Sandbox",
+      "AI Image Generation",
+      "AI-Image-Generation",
+      "E-Commerce Platform",
+      "E-Commerce-Platform",
       "DSA",
       "AnkushGitRepo",
-      "Pharmacy-Management-System",
+      "MERN-Sandbox",
+      "MERN Sandbox",
       "Currency_Converter_Using_Core_Java",
       "Currency Converter",
     ];
@@ -211,6 +214,62 @@ export function convertReposToProjects(repos: GitHubRepo[]): Project[] {
         liveUrl: repo.homepage || "",
         featured: true,
         category: "Web Development",
+        createdAt: repo.created_at,
+        updatedAt: repo.updated_at,
+      };
+    }
+
+    // Special handling for Password Management System repository
+    if (repo.name === "Password-Management-System" || repo.name === "Password Management System") {
+      return {
+        _id: repo.id.toString(),
+        title: "Password Management System",
+        description:
+          repo.description ||
+          "A secure password management application built with modern web technologies. Features include encrypted password storage, secure authentication, password generation, and user-friendly interface for managing multiple accounts safely.",
+        image: `${getAssetPath(
+          "/images/projects/Password_Manager_1.png"
+        )}, ${getAssetPath(
+          "/images/projects/Password_Manager_2.png"
+        )}, ${getAssetPath("/images/projects/Password_Manager_3.png")}`,
+        technologies:
+          repo.topics?.length > 0
+            ? repo.topics.map(
+                (topic) => topic.charAt(0).toUpperCase() + topic.slice(1)
+              )
+            : repo.language
+            ? [repo.language]
+            : ["React", "Node.js", "Express", "MongoDB", "Encryption"],
+        githubUrl: repo.html_url,
+        liveUrl: repo.homepage || "",
+        featured: true,
+        category: "Web Development",
+        createdAt: repo.created_at,
+        updatedAt: repo.updated_at,
+      };
+    }
+
+    // Special handling for Pharmacy Management System repository
+    if (repo.name === "Pharmacy-Management-System" || repo.name === "Pharmacy Management System") {
+      return {
+        _id: repo.id.toString(),
+        title: "Pharmacy Management System",
+        description:
+          repo.description ||
+          "A console-based system using Java and PostgreSQL for managing drug inventory and transactions. This application helps pharmacies track inventory, manage prescriptions, and process sales.\n\nThe system includes features for user authentication, inventory management, sales tracking, and reporting.",
+        image: getAssetPath("/images/projects/pharmacy-system.jpg"),
+        technologies:
+          repo.topics?.length > 0
+            ? repo.topics.map(
+                (topic) => topic.charAt(0).toUpperCase() + topic.slice(1)
+              )
+            : repo.language
+            ? [repo.language]
+            : ["Java", "PostgreSQL", "JDBC", "Console App"],
+        githubUrl: repo.html_url,
+        liveUrl: repo.homepage || "",
+        featured: true,
+        category: "Desktop Application",
         createdAt: repo.created_at,
         updatedAt: repo.updated_at,
       };

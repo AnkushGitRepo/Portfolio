@@ -9,10 +9,10 @@ import {
 } from "./mockData";
 import { fetchGitHubRepos, convertReposToProjects } from "./github";
 
-// Check if we're running on GitHub Pages
+// Check if we're running on GitHub Pages or in development
 const isGitHubPages =
-  typeof window !== "undefined" &&
-  window.location.hostname.includes("github.io");
+  (typeof window !== "undefined" && window.location.hostname.includes("github.io")) ||
+  process.env.NODE_ENV === "development";
 
 // Projects API with fallback
 export async function getAllProjects(): Promise<Project[]> {
@@ -24,16 +24,29 @@ export async function getAllProjects(): Promise<Project[]> {
       // Find special repositories
       const portfolioRepo = repos.find((repo) => repo.name === "Portfolio");
       const dataHarborRepo = repos.find((repo) => repo.name === "DataHarbor");
+      const resumeBuilderRepo = repos.find((repo) => repo.name === "Resume-Builder");
+      const periodicTableRepo = repos.find((repo) => repo.name === "Periodic-Table");
+      const passwordManagerRepo = repos.find((repo) => repo.name === "Password-Management-System");
+      const pharmacyManagerRepo = repos.find((repo) => repo.name === "Pharmacy-Management-System");
 
       // Get other repos excluding special ones
       const otherRepos = repos.filter(
-        (repo) => repo.name !== "Portfolio" && repo.name !== "DataHarbor"
+        (repo) => repo.name !== "Portfolio" &&
+                  repo.name !== "DataHarbor" &&
+                  repo.name !== "Resume-Builder" &&
+                  repo.name !== "Periodic-Table" &&
+                  repo.name !== "Password-Management-System" &&
+                  repo.name !== "Pharmacy-Management-System"
       );
 
       // Create prioritized repo list
       const prioritizedRepos = [];
       if (portfolioRepo) prioritizedRepos.push(portfolioRepo);
       if (dataHarborRepo) prioritizedRepos.push(dataHarborRepo);
+      if (resumeBuilderRepo) prioritizedRepos.push(resumeBuilderRepo);
+      if (periodicTableRepo) prioritizedRepos.push(periodicTableRepo);
+      if (passwordManagerRepo) prioritizedRepos.push(passwordManagerRepo);
+      if (pharmacyManagerRepo) prioritizedRepos.push(pharmacyManagerRepo);
 
       // Convert repos to projects, prioritizing special repos
       const repoProjects = convertReposToProjects([
@@ -78,13 +91,17 @@ export async function getAllProjects(): Promise<Project[]> {
       const dataHarborRepo = repos.find((repo) => repo.name === "DataHarbor");
       const resumeBuilderRepo = repos.find((repo) => repo.name === "Resume-Builder");
       const periodicTableRepo = repos.find((repo) => repo.name === "Periodic-Table");
+      const passwordManagerRepo = repos.find((repo) => repo.name === "Password-Management-System");
+      const pharmacyManagerRepo = repos.find((repo) => repo.name === "Pharmacy-Management-System");
 
       // Get other repos excluding special ones
       const otherRepos = repos.filter(
         (repo) => repo.name !== "Portfolio" &&
                   repo.name !== "DataHarbor" &&
                   repo.name !== "Resume-Builder" &&
-                  repo.name !== "Periodic-Table"
+                  repo.name !== "Periodic-Table" &&
+                  repo.name !== "Password-Management-System" &&
+                  repo.name !== "Pharmacy-Management-System"
       );
 
       // Create prioritized repo list
@@ -93,6 +110,8 @@ export async function getAllProjects(): Promise<Project[]> {
       if (dataHarborRepo) prioritizedRepos.push(dataHarborRepo);
       if (resumeBuilderRepo) prioritizedRepos.push(resumeBuilderRepo);
       if (periodicTableRepo) prioritizedRepos.push(periodicTableRepo);
+      if (passwordManagerRepo) prioritizedRepos.push(passwordManagerRepo);
+      if (pharmacyManagerRepo) prioritizedRepos.push(pharmacyManagerRepo);
 
       // Convert repos to projects, prioritizing special repos
       const repoProjects = convertReposToProjects([
@@ -138,13 +157,17 @@ export async function getFeaturedProjects(): Promise<Project[]> {
       const dataHarborRepo = repos.find((repo) => repo.name === "DataHarbor");
       const resumeBuilderRepo = repos.find((repo) => repo.name === "Resume-Builder");
       const periodicTableRepo = repos.find((repo) => repo.name === "Periodic-Table");
+      const passwordManagerRepo = repos.find((repo) => repo.name === "Password-Management-System");
+      const pharmacyManagerRepo = repos.find((repo) => repo.name === "Pharmacy-Management-System");
 
       // Get other repos excluding special ones
       const otherRepos = repos.filter(
         (repo) => repo.name !== "Portfolio" &&
                   repo.name !== "DataHarbor" &&
                   repo.name !== "Resume-Builder" &&
-                  repo.name !== "Periodic-Table"
+                  repo.name !== "Periodic-Table" &&
+                  repo.name !== "Password-Management-System" &&
+                  repo.name !== "Pharmacy-Management-System"
       );
 
       // Create prioritized repo list
@@ -153,6 +176,8 @@ export async function getFeaturedProjects(): Promise<Project[]> {
       if (dataHarborRepo) prioritizedRepos.push(dataHarborRepo);
       if (resumeBuilderRepo) prioritizedRepos.push(resumeBuilderRepo);
       if (periodicTableRepo) prioritizedRepos.push(periodicTableRepo);
+      if (passwordManagerRepo) prioritizedRepos.push(passwordManagerRepo);
+      if (pharmacyManagerRepo) prioritizedRepos.push(pharmacyManagerRepo);
 
       // Convert repos to projects, prioritizing special repos
       const repoProjects = convertReposToProjects([
@@ -206,13 +231,17 @@ export async function getFeaturedProjects(): Promise<Project[]> {
       const dataHarborRepo = repos.find((repo) => repo.name === "DataHarbor");
       const resumeBuilderRepo = repos.find((repo) => repo.name === "Resume-Builder");
       const periodicTableRepo = repos.find((repo) => repo.name === "Periodic-Table");
+      const passwordManagerRepo = repos.find((repo) => repo.name === "Password-Management-System");
+      const pharmacyManagerRepo = repos.find((repo) => repo.name === "Pharmacy-Management-System");
 
       // Get other repos excluding special ones
       const otherRepos = repos.filter(
         (repo) => repo.name !== "Portfolio" &&
                   repo.name !== "DataHarbor" &&
                   repo.name !== "Resume-Builder" &&
-                  repo.name !== "Periodic-Table"
+                  repo.name !== "Periodic-Table" &&
+                  repo.name !== "Password-Management-System" &&
+                  repo.name !== "Pharmacy-Management-System"
       );
 
       // Create prioritized repo list
@@ -221,6 +250,8 @@ export async function getFeaturedProjects(): Promise<Project[]> {
       if (dataHarborRepo) prioritizedRepos.push(dataHarborRepo);
       if (resumeBuilderRepo) prioritizedRepos.push(resumeBuilderRepo);
       if (periodicTableRepo) prioritizedRepos.push(periodicTableRepo);
+      if (passwordManagerRepo) prioritizedRepos.push(passwordManagerRepo);
+      if (pharmacyManagerRepo) prioritizedRepos.push(pharmacyManagerRepo);
 
       // Convert repos to projects, prioritizing special repos
       const repoProjects = convertReposToProjects([

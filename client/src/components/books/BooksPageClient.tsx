@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Book } from '@/types';
 import { useThemeColor } from '@/components/theme-color-context';
 import BookDetailModal from './BookDetailModal';
@@ -14,9 +15,11 @@ interface BooksPageClientProps {
 // Define genre categories for filtering
 type GenreCategory = 'All' | 'Business' | 'Self-Help' | 'Psychology' | 'Finance' | 'Technology' | 'Philosophy' | 'Communication';
 
-export default function BooksPageClient({ books }: BooksPageClientProps) {
+// Component that uses useSearchParams - needs to be wrapped in Suspense
+function BooksPageContent({ books }: BooksPageClientProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { currentColor } = useThemeColor(); // Kept for consistency with other components
+  const searchParams = useSearchParams();
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeGenres, setActiveGenres] = useState<GenreCategory[]>(['All']);
@@ -76,6 +79,19 @@ export default function BooksPageClient({ books }: BooksPageClientProps) {
       gradient: 'from-orange-600 to-orange-800',
     },
   ];
+
+  // Handle URL parameters for genre filtering
+  useEffect(() => {
+    const genreParam = searchParams.get('genre');
+    if (genreParam && genreParam !== 'All') {
+      // Check if the genre parameter is valid
+      const validGenres: GenreCategory[] = ['Business', 'Self-Help', 'Psychology', 'Finance', 'Technology', 'Philosophy', 'Communication'];
+      if (validGenres.includes(genreParam as GenreCategory)) {
+        setActiveGenres([genreParam as GenreCategory]);
+        setShowFilters(true); // Show filters when coming from a direct link
+      }
+    }
+  }, [searchParams]);
 
   // Set up color cycling
   useEffect(() => {
@@ -268,5 +284,28 @@ export default function BooksPageClient({ books }: BooksPageClientProps) {
         />
       )}
     </section>
+  );
+}
+
+// Main component that wraps BooksPageContent in Suspense
+export default function BooksPageClient({ books }: BooksPageClientProps) {
+  return (
+    <Suspense fallback={
+      <div className="py-20 bg-gradient-to-b from-blue-50 to-blue-100 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-blue-600">
+              My Bookshelf
+            </h1>
+            <div className="w-20 h-1 bg-blue-600 mx-auto mt-4 mb-6"></div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Loading books...
+            </p>
+          </div>
+        </div>
+      </div>
+    }>
+      <BooksPageContent books={books} />
+    </Suspense>
   );
 }

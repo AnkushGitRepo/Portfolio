@@ -134,7 +134,32 @@ export default function InfoCards({ projects }: InfoCardsProps) {
     title: "What I'm Reading",
     description: "Explore my collection of book reviews and recommendations.",
     link: "/books",
-    image: getAssetPath("/placeholder.svg")
+    genreBooks: [
+      {
+        title: "Blue Ocean Strategy",
+        author: "W. Chan Kim & Renée Mauborgne",
+        image: getAssetPath("/images/Books/Bluw_Ocean_Strategy.png"),
+        genre: "Business"
+      },
+      {
+        title: "Influence",
+        author: "Robert B. Cialdini",
+        image: getAssetPath("/images/Books/Influence_The_Psychology_Of_Persuasion.jpg"),
+        genre: "Psychology"
+      },
+      {
+        title: "Hooked",
+        author: "Nir Eyal",
+        image: getAssetPath("/images/Books/Hooked-Book.png"),
+        genre: "Technology"
+      },
+      {
+        title: "Bhagavad Gita As It Is",
+        author: "A.C. Bhaktivedanta Swami Prabhupada",
+        image: getAssetPath("/images/Books/Bhagavad_Gita_As_It_Is-Englsiih.png"),
+        genre: "Philosophy"
+      }
+    ]
   }
 
   const location = {
@@ -336,43 +361,58 @@ export default function InfoCards({ projects }: InfoCardsProps) {
           </Card>
 
           {/* Books Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(450px,70vh)] md:col-span-2 lg:col-span-1 flex flex-col">
-            <div className="relative h-40 w-full overflow-hidden">
-              <Image
-                src={getAssetPath("/placeholder.svg")}
-                alt="Books placeholder"
-                fill
-                className="object-cover transition-transform hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
-                <div>
-                  <Badge className="bg-white/20 text-white border-none backdrop-blur-sm mb-2">
-                    <BookOpen className="h-3 w-3 mr-1" />
-                    Reading List
-                  </Badge>
-                  <h3 className="text-xl font-bold text-white">{books.title}</h3>
-                </div>
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(500px,75vh)] md:col-span-2 lg:col-span-1 flex flex-col">
+            <CardHeader className={`transition-colors duration-500 ${colors.bg}`}>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xl font-bold text-white">{books.title}</CardTitle>
+                <BookOpen className="h-6 w-6 text-white/80" />
               </div>
-            </div>
+            </CardHeader>
             <CardContent className="pt-4 flex-grow overflow-y-auto custom-scrollbar">
-              <p className="text-sm text-slate-500">{books.description}</p>
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <div className="bg-slate-100 p-3 rounded-lg">
-                  <h4 className="font-medium text-slate-900 text-sm">Fiction</h4>
-                  <p className="text-xs text-slate-500">Novels, short stories, and literary works</p>
-                </div>
-                <div className="bg-slate-100 p-3 rounded-lg">
-                  <h4 className="font-medium text-slate-900 text-sm">Technology</h4>
-                  <p className="text-xs text-slate-500">Programming, AI, and tech trends</p>
-                </div>
-                <div className="bg-slate-100 p-3 rounded-lg">
-                  <h4 className="font-medium text-slate-900 text-sm">Science</h4>
-                  <p className="text-xs text-slate-500">Physics, astronomy, and discoveries</p>
-                </div>
-                <div className="bg-slate-100 p-3 rounded-lg">
-                  <h4 className="font-medium text-slate-900 text-sm">Philosophy</h4>
-                  <p className="text-xs text-slate-500">Ideas, concepts, and thought experiments</p>
-                </div>
+              <p className="text-sm text-slate-500 mb-4">{books.description}</p>
+
+              {/* Book Covers Row */}
+              <div className="flex gap-2 mb-4 overflow-x-auto">
+                {books.genreBooks.map((book, index) => (
+                  <div key={index} className="relative group flex-shrink-0">
+                    <div className="w-16 h-20 relative overflow-hidden rounded-md shadow-sm">
+                      <Image
+                        src={book.image}
+                        alt={book.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="mt-1">
+                      <p className="text-xs font-medium text-slate-700 line-clamp-1 w-16">{book.title}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Genre Tags */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {books.genreBooks.map((book, index) => {
+                  // Define static colors for each genre to maintain consistency
+                  const genreColors = {
+                    'Business': 'bg-blue-100 text-blue-700 hover:bg-blue-200',
+                    'Psychology': 'bg-green-100 text-green-700 hover:bg-green-200',
+                    'Technology': 'bg-purple-100 text-purple-700 hover:bg-purple-200',
+                    'Philosophy': 'bg-orange-100 text-orange-700 hover:bg-orange-200'
+                  };
+
+                  const colorClass = genreColors[book.genre as keyof typeof genreColors] || 'bg-gray-100 text-gray-700 hover:bg-gray-200';
+
+                  return (
+                    <Link
+                      key={index}
+                      href={`/books?genre=${book.genre}`}
+                      className={`px-3 py-1.5 text-xs rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md font-medium ${colorClass}`}
+                    >
+                      {book.genre}
+                    </Link>
+                  );
+                })}
               </div>
             </CardContent>
             <CardFooter>

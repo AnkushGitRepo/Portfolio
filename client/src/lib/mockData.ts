@@ -4,6 +4,45 @@ import { getAssetPath } from "./utils";
 // Mock Projects
 export const projects: Project[] = [
   {
+    _id: "1",
+    title: "Portfolio Website",
+    description:
+      "A modern, responsive portfolio website built with Next.js, React, and TypeScript. Features include dynamic theme cycling, project showcases, book reviews, and contact functionality. Optimized for SEO and performance with server-side rendering.",
+    image: `${getAssetPath("/images/projects/Portfolio_1.png")}, ${getAssetPath("/images/projects/Portfolio_2.png")}, ${getAssetPath("/images/projects/Portfolio_3.png")}`,
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js"],
+    githubUrl: "https://github.com/AnkushGitRepo/Portfolio",
+    liveUrl: "https://ankushgitrepo.github.io/Portfolio/",
+    featured: true,
+    category: "Web Development",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    _id: "2",
+    title: "Resume Builder",
+    description:
+      "An intelligent resume builder application that helps users create professional resumes with customizable templates. Features include real-time preview, PDF export, and ATS-friendly formatting to help job seekers create standout resumes.",
+    image: `${getAssetPath("/images/projects/Resume_Builder_1.png")}, ${getAssetPath("/images/projects/Resume_Builder_2.png")}, ${getAssetPath("/images/projects/Resume_Builder_3.png")}`,
+    technologies: ["React", "JavaScript", "CSS", "HTML", "PDF.js"],
+    githubUrl: "https://github.com/AnkushGitRepo/Resume-Builder",
+    liveUrl: "https://ankushgitrepo.github.io/Resume-Builder/",
+    featured: true,
+    category: "Web Development",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    _id: "3",
+    title: "Password Management System",
+    description:
+      "A secure password management application built with modern web technologies. Features include encrypted password storage, secure authentication, password generation, and user-friendly interface for managing multiple accounts safely.",
+    image: `${getAssetPath("/images/projects/Password_Manager_1.png")}, ${getAssetPath("/images/projects/Password_Manager_2.png")}, ${getAssetPath("/images/projects/Password_Manager_3.png")}`,
+    technologies: ["React", "Node.js", "Express", "MongoDB", "Encryption"],
+    githubUrl: "https://github.com/AnkushGitRepo/Password-Management-System",
+    liveUrl: "",
+    featured: true,
+    category: "Web Development",
+    createdAt: new Date().toISOString(),
+  },
+  {
     _id: "4",
     title: "Pharmacy Management System",
     description:
