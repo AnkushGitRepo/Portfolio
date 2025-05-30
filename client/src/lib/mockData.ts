@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: "Password Management System",
     description:
       "A secure password management application built with modern web technologies. Features include encrypted password storage, secure authentication, password generation, and user-friendly interface for managing multiple accounts safely.",
-    image: `${getAssetPath("/images/projects/Password_Manager_1.png")}, ${getAssetPath("/images/projects/Password_Manager_2.png")}, ${getAssetPath("/images/projects/Password_Manager_3.png")}`,
+    image: getAssetPath("/images/projects/github-repo.jpg"),
     technologies: ["React", "Node.js", "Express", "MongoDB", "Encryption"],
     githubUrl: "https://github.com/AnkushGitRepo/Password-Management-System",
     liveUrl: "",

@@ -227,11 +227,7 @@ export function convertReposToProjects(repos: GitHubRepo[]): Project[] {
         description:
           repo.description ||
           "A secure password management application built with modern web technologies. Features include encrypted password storage, secure authentication, password generation, and user-friendly interface for managing multiple accounts safely.",
-        image: `${getAssetPath(
-          "/images/projects/Password_Manager_1.png"
-        )}, ${getAssetPath(
-          "/images/projects/Password_Manager_2.png"
-        )}, ${getAssetPath("/images/projects/Password_Manager_3.png")}`,
+        image: getAssetPath("/images/projects/github-repo.jpg"),
         technologies:
           repo.topics?.length > 0
             ? repo.topics.map(
