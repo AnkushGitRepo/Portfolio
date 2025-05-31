@@ -361,21 +361,21 @@ export default function InfoCards({ projects }: InfoCardsProps) {
           </Card>
 
           {/* Books Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(500px,75vh)] md:col-span-2 lg:col-span-1 flex flex-col">
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(500px,75vh)] flex flex-col">
             <CardHeader className={`transition-colors duration-500 ${colors.bg}`}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl font-bold text-white">{books.title}</CardTitle>
                 <BookOpen className="h-6 w-6 text-white/80" />
               </div>
             </CardHeader>
-            <CardContent className="pt-4 flex-grow overflow-y-auto custom-scrollbar">
+            <CardContent className="pt-4 flex-grow overflow-y-auto custom-scrollbar flex flex-col">
               <p className="text-sm text-slate-500 mb-4">{books.description}</p>
 
-              {/* Book Covers Row */}
-              <div className="flex gap-2 mb-4 overflow-x-auto">
+              {/* Book Covers Horizontal Row */}
+              <div className="flex gap-3 mb-4">
                 {books.genreBooks.map((book, index) => (
-                  <div key={index} className="relative group flex-shrink-0">
-                    <div className="w-16 h-20 relative overflow-hidden rounded-md shadow-sm">
+                  <div key={index} className="relative group flex-1">
+                    <div className="aspect-[3/4] relative overflow-hidden rounded-lg shadow-md">
                       <Image
                         src={book.image}
                         alt={book.title}
@@ -383,36 +383,28 @@ export default function InfoCards({ projects }: InfoCardsProps) {
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
-                    <div className="mt-1">
-                      <p className="text-xs font-medium text-slate-700 line-clamp-1 w-16">{book.title}</p>
-                    </div>
                   </div>
                 ))}
               </div>
 
-              {/* Genre Tags */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {books.genreBooks.map((book, index) => {
-                  // Define static colors for each genre to maintain consistency
-                  const genreColors = {
-                    'Business': 'bg-blue-100 text-blue-700 hover:bg-blue-200',
-                    'Psychology': 'bg-green-100 text-green-700 hover:bg-green-200',
-                    'Technology': 'bg-purple-100 text-purple-700 hover:bg-purple-200',
-                    'Philosophy': 'bg-orange-100 text-orange-700 hover:bg-orange-200'
-                  };
+              {/* Spacer to push genre buttons to bottom */}
+              <div className="flex-grow"></div>
 
-                  const colorClass = genreColors[book.genre as keyof typeof genreColors] || 'bg-gray-100 text-gray-700 hover:bg-gray-200';
-
-                  return (
+              {/* Genre Filter Buttons Grid (2x2) - Positioned at bottom */}
+              <div className="pt-6 pb-4">
+                <div className="grid grid-cols-2 gap-2">
+                  {books.genreBooks.map((book, index) => (
                     <Link
                       key={index}
                       href={`/books?genre=${book.genre}`}
-                      className={`px-3 py-1.5 text-xs rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md font-medium ${colorClass}`}
+                      className="py-2.5 px-3 flex items-center justify-center border border-slate-200 rounded-md transition-all duration-300 hover:border-slate-300 hover:shadow-sm hover:scale-105 bg-white"
                     >
-                      {book.genre}
+                      <span className="text-xs font-medium text-slate-600 text-center px-2">
+                        {book.genre}
+                      </span>
                     </Link>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
             </CardContent>
             <CardFooter>
@@ -426,7 +418,7 @@ export default function InfoCards({ projects }: InfoCardsProps) {
           </Card>
 
           {/* Location Card */}
-          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(450px,70vh)] md:col-span-2 lg:col-span-2 flex flex-col">
+          <Card className="overflow-hidden border-none bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl h-[min(500px,75vh)] md:col-span-2 lg:col-span-2 flex flex-col">
             <div className="relative h-60 w-full overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.70717963153!2d72.43965535!3d23.0201716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1651234567890!5m2!1sen!2sin"
