@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -43,27 +44,30 @@ const Navbar = () => {
             </button>
 
             {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-light-bg flex flex-col justify-center items-center space-y-8 md:hidden z-40"
-                    >
-                        {navLinks.map((item) => (
-                            <button
-                                key={item}
-                                onClick={() => scrollToSection(item.toLowerCase())}
-                                className="text-3xl font-bold font-sans text-black hover:text-gray-600 transition-colors"
-                            >
-                                {item}
-                            </button>
-                        ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {createPortal(
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="fixed inset-0 bg-light-bg/90 backdrop-blur-md flex flex-col justify-center items-center space-y-8 md:hidden z-40"
+                        >
+                            {navLinks.map((item) => (
+                                <button
+                                    key={item}
+                                    onClick={() => scrollToSection(item.toLowerCase())}
+                                    className="text-3xl font-bold font-sans text-black hover:text-gray-600 transition-colors"
+                                >
+                                    {item}
+                                </button>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </nav>
     );
 };
