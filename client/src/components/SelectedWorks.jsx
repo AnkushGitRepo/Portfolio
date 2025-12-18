@@ -37,13 +37,28 @@ const ProjectItem = ({ project, index }) => {
                     </div>
 
                     {/* 2. Media Embed (Image or Video) */}
-                    <div className="w-full aspect-video bg-black/20 rounded-lg overflow-hidden shadow-2xl">
+                    <div className="w-full aspect-video bg-black/20 rounded-lg overflow-hidden shadow-2xl relative group">
                         {project.image ? (
-                            <img
-                                src={project.image}
-                                alt={project.title}
-                                className="w-full h-full object-cover"
-                            />
+                            project.liveLink ? (
+                                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="block w-full h-full relative cursor-pointer">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-12 h-12 text-white">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            ) : (
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="w-full h-full object-cover"
+                                />
+                            )
                         ) : (
                             <iframe
                                 width="100%"
@@ -62,7 +77,7 @@ const ProjectItem = ({ project, index }) => {
                     <ul className="space-y-2">
                         {project.description.map((point, i) => (
                             <li key={i} className="flex items-start text-gray-300 font-sans text-lg leading-relaxed">
-                                <span className="mr-3 mt-1.5 text-xs text-gray-500">●</span>
+                                <span className="mr-3 mt-1.5 text-xs text-gray-500 hidden md:inline">●</span>
                                 <span className="flex-1">{point}</span>
                             </li>
                         ))}
@@ -92,6 +107,7 @@ const SelectedWorks = () => {
             role: "Full-Stack Developer",
             stack: "MERN Stack, Tailwind, Cloudinary",
             githubLink: "AnkushGitRepo/BuildMyResume",
+            liveLink: "https://buildmyresume-virid.vercel.app/",
             image: buildMyResumeImg,
             description: [
                 "Engineered a real-time preview editor enabling instant rendering of template updates for an improved user experience.",
@@ -115,7 +131,7 @@ const SelectedWorks = () => {
 
     return (
         <section id="projects" className="py-20 bg-dark-bg text-off-white px-6 md:px-12">
-            <h2 className="text-6xl md:text-8xl font-bold text-off-white mb-20 tracking-tighter uppercase">Projects /</h2>
+            <h2 className="text-6xl md:text-8xl font-bold text-off-white mb-10 md:mb-20 tracking-tighter uppercase">Projects /</h2>
 
             <div className="flex flex-col">
                 {projects.map((project, index) => (

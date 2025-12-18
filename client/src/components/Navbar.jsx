@@ -34,40 +34,6 @@ const Navbar = () => {
                     </button>
                 ))}
             </div>
-
-            {/* Mobile Menu Toggle */}
-            <button
-                className="md:hidden text-black font-medium relative z-50 focus:outline-none"
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                {isOpen ? "Close" : "Menu"}
-            </button>
-
-            {/* Mobile Menu Overlay */}
-            {createPortal(
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                            className="fixed inset-0 bg-light-bg/90 backdrop-blur-md flex flex-col justify-center items-center space-y-8 md:hidden z-40"
-                        >
-                            {navLinks.map((item) => (
-                                <button
-                                    key={item}
-                                    onClick={() => scrollToSection(item.toLowerCase())}
-                                    className="text-3xl font-bold font-sans text-black hover:text-gray-600 transition-colors"
-                                >
-                                    {item}
-                                </button>
-                            ))}
-                        </motion.div>
-                    )}
-                </AnimatePresence>,
-                document.body
-            )}
         </nav>
     );
 };

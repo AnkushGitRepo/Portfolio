@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
+import MobileActionBar from './MobileActionBar';
 // Footer is likely unused in the single-page home design (as ContactFooter is inside Home), 
 // but we keep it for other pages if they exist. 
 // For Home, we probably don't want the default Footer appearing after the specific ContactFooter.
@@ -12,6 +13,7 @@ const Layout = ({ children }) => {
             <main className="w-full">
                 {children}
             </main>
+            <MobileActionBar />
             {/* <Footer />  -- Disabling global footer to rely on page-specific footers (like ContactFooter in Home) */}
         </div>
     );
