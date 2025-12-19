@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiFolder, FiCpu, FiUser, FiAward, FiMail } from "react-icons/fi";
 
 const MobileActionBar = () => {
+    const [isVisible, setIsVisible] = useState(true);
     const [activeSection, setActiveSection] = useState('');
 
     const navItems = [
@@ -21,7 +22,17 @@ const MobileActionBar = () => {
 
     // Highlight active section on scroll
     useEffect(() => {
+        let timeoutId;
         const handleScroll = () => {
+            // Show bar on scroll
+            setIsVisible(true);
+            clearTimeout(timeoutId);
+
+            // Hide bar after 2 seconds of inactivity
+            timeoutId = setTimeout(() => {
+                setIsVisible(false);
+            }, 2000);
+
             const sections = navItems.map(item => document.getElementById(item.id));
             const scrollPosition = window.scrollY + window.innerHeight / 2;
 
@@ -34,11 +45,14 @@ const MobileActionBar = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(timeoutId);
+        };
     }, []);
 
     return (
-        <div className="md:hidden fixed bottom-0 left-0 w-full bg-light-bg/80 backdrop-blur-sm border-t border-black/5 py-3 px-6 flex justify-around items-center z-50 pb-safe">
+        <div className={`md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[400px] bg-light-bg/80 backdrop-blur-md border border-black/10 shadow-2xl rounded-full py-3 px-6 flex justify-around items-center z-50 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
             {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeSection === item.id;

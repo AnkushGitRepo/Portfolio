@@ -43,7 +43,8 @@ const Hero = () => {
                         <img
                             src={ankushImg}
                             alt="Ankush Gupta"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover select-none"
+                            draggable="false"
                         />
                     </div>
                 </div>
