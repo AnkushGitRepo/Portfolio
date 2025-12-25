@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ankushg.vercel.app/sitemap.xml
