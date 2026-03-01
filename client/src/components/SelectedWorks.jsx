@@ -1,5 +1,5 @@
 import React from 'react';
-import buildMyResumeImg from '../assets/BuildMyResume.png';
+import sortingVisualizerImg from '../assets/SortingVisualizer.png';
 import modelHubImg from '../assets/ModelHub.png';
 
 const ProjectItem = ({ project, index }) => {
@@ -103,16 +103,16 @@ const SelectedWorks = () => {
             ]
         },
         {
-            title: "BuildMyResume",
-            role: "Full-Stack Developer",
-            stack: "MERN Stack, Tailwind, Cloudinary",
-            githubLink: "AnkushGitRepo/BuildMyResume",
-            liveLink: "https://buildmyresume-virid.vercel.app/",
-            image: buildMyResumeImg,
+            title: "Sorting Visualizer",
+            role: "Frontend Developer",
+            stack: "React, Vite, CSS3, Framer Motion",
+            githubLink: "AnkushGitRepo/Sorting_Visualizer_SEM-V",
+            liveLink: "https://sorting-visualizer-sem-v.vercel.app/",
+            image: sortingVisualizerImg,
             description: [
-                "Engineered a real-time preview editor enabling instant rendering of template updates for an improved user experience.",
-                "Implemented secure media storage and template asset management using Cloudinary.",
-                "Designed scalable REST APIs using Express and Node.js for template management and user operations."
+                "Developed a dynamic web application to visualize various sorting algorithms including Bubble, Merge, Quick, Insertion, and Selection sorts.",
+                "Implemented smooth animations and step-by-step visualizations using framer-motion to enhance algorithm comprehension.",
+                "Provided adjustable animation speed controls and theoretical complexity analysis for deeper learning."
             ]
         },
         {

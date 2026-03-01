@@ -1,13 +1,22 @@
+console.log('--- STARTING SERVER.JS ---');
+console.log('Loading express...');
 const express = require('express');
+console.log('Loading dotenv...');
 const dotenv = require('dotenv');
+console.log('Loading cors...');
 const cors = require('cors');
+console.log('Loading db...');
 const connectDB = require('./config/db');
 
+console.log('Loading env vars...');
 // Load env vars
 dotenv.config();
 
+console.log('Calling connectDB...');
 // Connect to database
 connectDB();
+
+console.log('Creating app...');
 
 const app = express();
 
@@ -29,10 +38,8 @@ app.use('/api/contact', require('./routes/contact'));
 
 const PORT = process.env.PORT || 5000;
 
-if (require.main === module) {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-}
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = app;
