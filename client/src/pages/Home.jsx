@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import SelectedWorks from '../components/SelectedWorks';
+import UIShowcase from '../components/UIShowcase';
 import Skills from '../components/Skills';
 import AboutSection from '../components/AboutSection';
 import Certification from '../components/Certification';
@@ -11,6 +12,7 @@ const Home = () => {
         <div className="px-0"> {/* Removing padding to allow full width backgrounds */}
             <Hero />
             <SelectedWorks />
+            <UIShowcase />
             <Skills />
             <AboutSection />
             <Certification />

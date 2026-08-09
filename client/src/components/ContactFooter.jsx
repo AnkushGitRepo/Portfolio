@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FiGithub, FiInstagram, FiLinkedin, FiMail } from 'react-icons/fi';
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
+import { FaDribbble } from 'react-icons/fa';
+import { SiFiverr } from 'react-icons/si';
+import { InlineWidget } from 'react-calendly';
+
+const CALENDLY_URL = 'https://calendly.com/ankushg-personal/30min';
 
 const ContactFooter = () => {
     const [time, setTime] = useState('');
@@ -33,24 +38,15 @@ const ContactFooter = () => {
                 {/* Contact Info & Buttons */}
                 <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
 
-                    {/* Direct Contact */}
-                    <div className="space-y-4">
-                        <a href="mailto:ankushgupta1806@gmail.com" className="block text-2xl md:text-5xl font-sans font-bold text-white hover:text-gray-300 transition-colors whitespace-nowrap">
-                            ankushgupta1806@gmail.com
-                        </a>
-                        <a href="tel:+917202906881" className="block text-2xl md:text-4xl font-mono text-gray-400 hover:text-white transition-colors">
-                            +91 7202906881
-                        </a>
+                    {/* Calendly Scheduler */}
+                    <div className="max-w-3xl mx-auto text-left">
+                        <div className="rounded-2xl overflow-hidden border border-white/10 bg-white">
+                            <InlineWidget url={CALENDLY_URL} styles={{ height: '650px' }} />
+                        </div>
                     </div>
 
                     {/* Quick Action Buttons */}
                     <div className="flex flex-wrap justify-center gap-6">
-                        <a
-                            href="mailto:ankushgupta1806@gmail.com"
-                            className="px-8 py-4 w-52 bg-transparent border border-white text-white font-bold uppercase tracking-wider rounded-full hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2"
-                        >
-                            <FiMail className="text-xl" /> Email Me
-                        </a>
                         <a
                             href="https://www.linkedin.com/in/ankushgupta18/"
                             target="_blank"
@@ -68,12 +64,20 @@ const ContactFooter = () => {
                             <FiGithub className="text-xl" /> GitHub
                         </a>
                         <a
-                            href="https://www.instagram.com/_ankushg/"
+                            href="https://dribbble.com/ankushg-personal"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-8 py-4 w-52 bg-transparent border border-white text-white font-bold uppercase tracking-wider rounded-full hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2"
                         >
-                            <FiInstagram className="text-xl" /> Instagram
+                            <FaDribbble className="text-xl" /> Dribbble
+                        </a>
+                        <a
+                            href="https://www.fiverr.com/ankushgupta_dev"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-8 py-4 w-52 bg-transparent border border-white text-white font-bold uppercase tracking-wider rounded-full hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2"
+                        >
+                            <SiFiverr className="text-xl" /> Fiverr
                         </a>
                     </div>
                 </div>
@@ -85,8 +89,9 @@ const ContactFooter = () => {
                     <h4 className="font-bold text-black mb-4">Socials</h4>
                     <ul className="space-y-2">
                         <li><a href="https://www.linkedin.com/in/ankushgupta18/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">Linkedin</a></li>
-                        <li><a href="https://www.instagram.com/_ankushg/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">Instagram</a></li>
                         <li><a href="https://github.com/AnkushGitRepo" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">Github</a></li>
+                        <li><a href="https://dribbble.com/ankushg-personal" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">Dribbble</a></li>
+                        <li><a href="https://www.fiverr.com/ankushgupta_dev" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">Fiverr</a></li>
                     </ul>
                 </div>
 

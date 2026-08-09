@@ -12,7 +12,7 @@ const Skills = () => {
         },
         {
             title: "Database & Tools",
-            items: ["MongoDB", "MySQL", "PostgreSQL", "Git", "GitHub", "Postman"]
+            items: ["MongoDB", "MySQL", "PostgreSQL", "Stitch", "Git", "GitHub", "Postman", "Docker", "Kubernetes", "Claude Code", "Antigravity"]
         },
         {
             title: "Soft Skills",
